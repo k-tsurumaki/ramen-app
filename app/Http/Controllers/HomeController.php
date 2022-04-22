@@ -23,6 +23,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('profile');
+        return view('home');
+    }
+
+    public function timeline()
+    {
+        return view('timeline');
+    }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Request $request)
+    {
+        $posts = $request->all();
+        dd($posts);
+        return view('home');
     }
 }

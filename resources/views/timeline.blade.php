@@ -1,20 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+<div class="row mx-3">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                検索
+            </div>
+            <div class="card-body">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                タイムライン
+            </div>
+            <div class="card-body">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                プロフィール
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <h3>ユーザー名</h3>
+                    <br>
+                    <img src="..." alt="ユーザーアイコン" class="img-thumbnail">
                 </div>
             </div>
         </div>
