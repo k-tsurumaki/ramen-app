@@ -5,8 +5,9 @@
     <div class="card-header">
         新規投稿
     </div>
-    <form class="card-body" action="{{ route('store') }}" method="POST">
+    <form class="card-body" action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <input class="mb-3" type="file" name="image">
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="shop" placeholder="店名">
         </div>
@@ -244,7 +245,7 @@
             <br>
         </div>
 
-        <button type="submit" class="btn btn-primary">保存</button>
+        <button type="submit" class="btn btn-primary">作成</button>
     </form>
 </div>
 @endsection
