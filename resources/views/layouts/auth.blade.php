@@ -76,14 +76,7 @@
         </nav>
 
         <main class="py-4">
-            <div class="row">
-                <div class="col-md-3">左カラム</div>
-                <div class="col-md-6">中央カラム</div>
-                <div class="col-md-3">
-                    右カラム
-                    @yield('content')
-                </div>
-            </div>
+            @yield('content')
         </main>
     </div>
 </body>
