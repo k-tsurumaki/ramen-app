@@ -9,3 +9,4 @@ class Menu extends Model
 {
     use HasFactory;
 }
+
