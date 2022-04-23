@@ -3,7 +3,7 @@
 @section('content')
 <div class="card  mx-auto" style="width: 33%;">
     <div class="card-header">
-        新規投稿
+        編集
     </div>
     <form class="card-body" action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -15,10 +15,10 @@
             <input type="text" class="form-control" name="menu" placeholder="メニュー名">
         </div>
         <div class="form-group mb-3" >
-            <input type="text" class="form-control" name="price" placeholder="値段(円)">
+            <input type="text" class="form-control" name="price" placeholder="値段(円)" value="{{ $edit_post['price'] }}">
         </div>
         <div class="form-group mb-3" >
-            <textarea class="form-control" name="content" rows="3" placeholder="本文を入力"></textarea>
+            <textarea class="form-control" name="content" rows="3" placeholder="本文を入力" >{{$edit_post['content']}}</textarea>
         </div>
         <select class="form-select mb-3" name="kind" aria-label="Default select example">
             <option selected>種類</option>
@@ -248,7 +248,7 @@
             <br>
         </div>
 
-        <button type="submit" class="btn btn-primary">作成</button>
+        <button type="submit" class="btn btn-primary">更新</button>
     </form>
 </div>
 @endsection

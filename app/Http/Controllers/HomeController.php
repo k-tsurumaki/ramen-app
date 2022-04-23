@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts=Post::select('posts.*')
+        $posts = Post::select('posts.*')
             ->where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'DESC')
@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function timeline()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts=Post::select('posts.*')
+        $posts = Post::select('posts.*')
         ->where('user_id', '=', \Auth::id())
         ->whereNull('deleted_at')
         ->orderBy('updated_at', 'DESC')
@@ -57,13 +57,13 @@ class HomeController extends Controller
     public function edit($id)
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts=Post::select('posts.*')
+        $posts = Post::select('posts.*')
             ->where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'DESC')
             ->get();
-        
-        return view('home', compact('posts'));
+        $edit_post = Post::find($id);
+        return view('edit', compact('posts', 'edit_post'));
     }
 
     public function store(Request $request)
