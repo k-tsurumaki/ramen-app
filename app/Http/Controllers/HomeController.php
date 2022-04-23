@@ -88,7 +88,7 @@ class HomeController extends Controller
                 $shop_id = $shop[0]['id'];
             }
 
-            $kind = $this->getKind($posts['kind']);
+            $kind = Menu::getKind($posts['kind']);
 
             // 存在確認
             $menu_exist=Shop::where('name', '=', $posts['menu'])->exists();
@@ -122,11 +122,5 @@ class HomeController extends Controller
         });
 
         return redirect(route('home'));
-    }
-
-    public function getKind($kind_number)
-    {
-        $kind_array = ['醤油', '塩', '豚骨', '味噌', '鶏白湯', 'つけ麺', 'まぜそば・油そば', '家系', '二郎系', 'その他'];
-        return $kind_array[$kind_number-1];
     }
 }
