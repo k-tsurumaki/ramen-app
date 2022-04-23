@@ -15,9 +15,12 @@
             <input type="text" class="form-control" name="menu" placeholder="メニュー名">
         </div>
         <div class="form-group mb-3" >
+            <input type="text" class="form-control" name="price" placeholder="値段(円)">
+        </div>
+        <div class="form-group mb-3" >
             <textarea class="form-control" name="content" rows="3" placeholder="本文を入力"></textarea>
         </div>
-        <select class="form-select mb-3" aria-label="Default select example">
+        <select class="form-select mb-3" name="kind" aria-label="Default select example">
             <option selected>種類</option>
             <option value="1">醤油</option>
             <option value="2">塩</option>
@@ -36,23 +39,23 @@
                 <p>味の濃さ</p>
                 <p style="display:inline">あっさり</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_1" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">こってり</p>
@@ -62,23 +65,23 @@
                 <p>麺の太さ</p>
                 <p style="display:inline">細い</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_2" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">太い</p>
@@ -88,23 +91,23 @@
                 <p>値段</p>
                 <p style="display:inline">安い</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">高い</p>
@@ -114,23 +117,23 @@
                 <p>見た目</p>
                 <p style="display:inline">微妙</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_4" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">きれい</p>
@@ -140,23 +143,23 @@
                 <p>総合評価</p>
                 <p style="display:inline">悪い</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_5" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">良い</p>
@@ -169,23 +172,23 @@
                 <p>雰囲気</p>
                 <p style="display:inline">きたない</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">きれい</p>
@@ -195,23 +198,23 @@
                 <p>接客</p>
                 <p style="display:inline">悪い</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_7" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">良い</p>
@@ -221,23 +224,23 @@
                 <p>アクセス</p>
                 <p style="display:inline">悪い</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio3" value="option3">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio3" value="3">
                     <label class="form-check-label" for="inlineRadio3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio4" value="option4">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio4" value="4">
                     <label class="form-check-label" for="inlineRadio4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio5" value="option5">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions_8" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
                 <p style="display:inline">良い</p>

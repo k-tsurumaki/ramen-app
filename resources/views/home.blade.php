@@ -18,7 +18,10 @@
                 過去の投稿
             </div>
             <div class="card-body">
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            @foreach($posts as $post)
+                <a class="card-text d-block">{{ $post['content'] }}</a>
+                <img src="{{ '/storage/'.$post['image'] }}" class='w-10 mb-3'/>
+            @endforeach
             </div>
         </div>
     </div>
