@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                過去の投稿
+                タイムライン
             </div>
             <div class="card-body">
             @foreach($posts as $post)
