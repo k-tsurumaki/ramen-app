@@ -21,7 +21,6 @@
             <textarea class="form-control" name="content" rows="3" placeholder="本文を入力"></textarea>
         </div>
         <select class="form-select mb-3" name="kind" aria-label="Default select example">
-            <option selected>種類</option>
             <option value="1">醤油</option>
             <option value="2">塩</option>
             <option value="3">豚骨</option>
@@ -89,7 +88,7 @@
             <br>
             <div class="mb-3 text-center">
                 <p>値段</p>
-                <p style="display:inline">高い</p>
+                <p style="display:inline">安い</p>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
@@ -110,7 +109,7 @@
                     <input class="form-check-input" type="radio" name="inlineRadioOptions_3" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
-                <p style="display:inline">安い</p>
+                <p style="display:inline">高い</p>
             </div>
             <br>
             <div class="mb-3 text-center">
@@ -170,7 +169,7 @@
             <h5>店について</h5>
             <div class="mb-3 text-center">
                 <p>雰囲気</p>
-                <p style="display:inline">悪い</p>
+                <p style="display:inline">静か</p>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">1</label>
@@ -191,7 +190,7 @@
                     <input class="form-check-input" type="radio" name="inlineRadioOptions_6" id="inlineRadio5" value="5">
                     <label class="form-check-label" for="inlineRadio5">5</label>
                 </div>
-                <p style="display:inline">良い</p>
+                <p style="display:inline">にぎやか</p>
             </div>
             <br>
             <div class="mb-3 text-center">

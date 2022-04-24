@@ -52,13 +52,13 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="home">ホーム</a>
+                                <a class="nav-link" href="{{ route('home') }}">ホーム</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="timeline">タイムライン</a>
+                                <a class="nav-link" href="{{ route('timeline') }}">タイムライン</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="create">新規投稿</a>
+                                <a class="nav-link" href="{{ route('create') }}">新規投稿</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
