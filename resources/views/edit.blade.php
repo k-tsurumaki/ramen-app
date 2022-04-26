@@ -6,12 +6,12 @@
 
 @section('content')
 <div class="card  mx-auto" style="width: 33%;">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
         編集
-        <form class="card-body" id="delete-form" action="{{ route('destroy') }}" method="POST">
+        <form id="delete-form" action="{{ route('destroy') }}" method="POST">
             @csrf
             <input type="hidden" name="post_id" value="{{ $edit_post['id'] }}"/>
-            <button type="submit" onclick="deleteHandle(event);">削除</button>
+            <i class="fas fa-trash mx-3" onclick="deleteHandle(event);"></i>
         </form>
     </div>
     <form class="card-body" action="{{ route('update') }}" method="POST" enctype="multipart/form-data">

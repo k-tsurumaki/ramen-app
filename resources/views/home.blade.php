@@ -6,9 +6,10 @@
         @include('includes.search')
     </div>
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
                 過去の投稿
+                <a href="{{ route('create') }}"><i class="fas fa-plus"></i></a>
             </div>
             <div class="card-body">
             @foreach($posts as $post)
