@@ -148,7 +148,7 @@ class HomeController extends Controller
             $kind = Menu::getKind($posts['kind']);
 
             // 存在確認
-            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->exists();
+            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->where('kind', '=', $kind)->exists();
 
             // menu_idを取得
             if(!$menu_exist){
@@ -156,6 +156,8 @@ class HomeController extends Controller
             }else{
                 $menu = Menu::select('menus.*')
                 ->where('name', '=', $posts['menu'])
+                ->where('shop_id', '=', $shop_id)
+                ->where('kind', '=', $kind)
                 ->get();
                 $menu_id = $menu[0]['id'];
             }

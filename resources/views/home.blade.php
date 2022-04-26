@@ -13,7 +13,7 @@
             <div class="card-body">
             @foreach($posts as $post)
                 <a href="/edit/{{ $post['id'] }}" class="card-text d-block">{{ $post['content'] }}</a>
-                <img src="{{ '/storage/'.$post['image'] }}" class='img-fluid mx-auto d-block mb-3'/>
+                <img src="{{ '/storage/'.$post['image'] }}" style="width:50%;" class='img-fluid mx-auto d-block mb-3'/>
             @endforeach
             </div>
         </div>
