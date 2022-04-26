@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
+@section('javascript')
+<script src="/js/confirm.js"></script>
+@endsection
+
 @section('content')
 <div class="card  mx-auto" style="width: 33%;">
     <div class="card-header">
         編集
-        <form class="card-body" action="{{ route('destroy') }}" method="POST">
+        <form class="card-body" id="delete-form" action="{{ route('destroy') }}" method="POST">
             @csrf
             <input type="hidden" name="post_id" value="{{ $edit_post['id'] }}"/>
-            <button type="submit">削除</button>
+            <button type="submit" onclick="deleteHandle(event);">削除</button>
         </form>
     </div>
     <form class="card-body" action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
