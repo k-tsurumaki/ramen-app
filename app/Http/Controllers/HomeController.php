@@ -41,10 +41,9 @@ class HomeController extends Controller
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
         $posts = Post::select('posts.*')
-        ->where('user_id', '=', \Auth::id())
-        ->whereNull('deleted_at')
-        ->orderBy('updated_at', 'DESC')
-        ->get();
+            ->whereNull('deleted_at')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         
         return view('timeline', compact('posts'));
     }
@@ -86,23 +85,25 @@ class HomeController extends Controller
                 $shop_id = Shop::insertGetId(['name'=>$posts['shop']]);
             }else{
                 $shop = Shop::select('shops.*')
-                ->where('name', '=', $posts['shop'])
-                ->get();
+                    ->where('name', '=', $posts['shop'])
+                    ->get();
                 $shop_id = $shop[0]['id'];
             }
 
             $kind = Menu::getKind($posts['kind']);
 
             // 存在確認
-            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->exists();
+            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->where('kind', '=', $kind)->exists();
 
             // menu_idを取得
             if(!$menu_exist){
                 $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind]);
             }else{
                 $menu = Menu::select('menus.*')
-                ->where('name', '=', $posts['menu'])
-                ->get();
+                    ->where('name', '=', $posts['menu'])
+                    ->where('shop_id', '=', $shop_id)
+                    ->where('kind', '=', $kind)
+                    ->get();
                 $menu_id = $menu[0]['id'];
             }
     
@@ -140,8 +141,8 @@ class HomeController extends Controller
                 $shop_id = Shop::insertGetId(['name'=>$posts['shop']]);
             }else{
                 $shop = Shop::select('shops.*')
-                ->where('name', '=', $posts['shop'])
-                ->get();
+                    ->where('name', '=', $posts['shop'])
+                    ->get();
                 $shop_id = $shop[0]['id'];
             }
 
@@ -155,10 +156,10 @@ class HomeController extends Controller
                 $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind]);
             }else{
                 $menu = Menu::select('menus.*')
-                ->where('name', '=', $posts['menu'])
-                ->where('shop_id', '=', $shop_id)
-                ->where('kind', '=', $kind)
-                ->get();
+                    ->where('name', '=', $posts['menu'])
+                    ->where('shop_id', '=', $shop_id)
+                    ->where('kind', '=', $kind)
+                    ->get();
                 $menu_id = $menu[0]['id'];
             }
 
@@ -176,6 +177,8 @@ class HomeController extends Controller
                 'hospitality'=>(int)$posts['hospitality'],
                 'access'=>(int)$posts['access']
             ]);
+
+
         });
         return redirect(route('home'));
     }

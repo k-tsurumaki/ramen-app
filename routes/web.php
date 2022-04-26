@@ -14,12 +14,9 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/timeline', [HomeController::class, 'timeline'])->name('timeline');
 Route::get('/create', [HomeController::class, 'create'])->name('create');
