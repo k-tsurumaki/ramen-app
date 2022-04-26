@@ -51,25 +51,22 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('create');
+        $menu_kind_list = Menu::getKindList();
+        return view('create', compact('menu_kind_list'));
     }
 
     public function edit($id)
     {
-        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
         $edit_post = Post::find($id);
         $shop = Shop::find($edit_post['shop_id']);
         $shop_name = $shop['name'];
         $menu = Menu::find($edit_post['menu_id']);
         $menu_name = $menu['name'];
-        $menu_kind = $menu['kind'];
 
-        return view('edit', compact('posts', 'edit_post', 'shop_name', 'menu_name', 'menu_kind'));
+        $menu_kind_number = Menu::getKindNumber($menu['kind']);
+        $menu_kind_list = Menu::getKindList();
+
+        return view('edit', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
     }
 
     public function store(Request $request)
@@ -97,13 +94,13 @@ class HomeController extends Controller
             $kind = Menu::getKind($posts['kind']);
 
             // 存在確認
-            $menu_exist=Shop::where('name', '=', $posts['menu'])->exists();
+            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->exists();
 
             // menu_idを取得
             if(!$menu_exist){
                 $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind]);
             }else{
-                $menu = Menu::select('shops.*')
+                $menu = Menu::select('menus.*')
                 ->where('name', '=', $posts['menu'])
                 ->get();
                 $menu_id = $menu[0]['id'];
@@ -116,14 +113,14 @@ class HomeController extends Controller
                 'content'=>$posts['content'],
                 'image'=>$path[1], 
                 'price'=>(int)$posts['price'],
-                'thickness'=>(int)$posts['inlineRadioOptions_1'],
-                'intensity'=>(int)$posts['inlineRadioOptions_2'], 
-                'price_value'=>(int)$posts['inlineRadioOptions_3'],
-                'look'=>(int)$posts['inlineRadioOptions_4'],
-                'all'=>(int)$posts['inlineRadioOptions_5'],
-                'atmosphere'=>(int)$posts['inlineRadioOptions_6'],
-                'hospitality'=>(int)$posts['inlineRadioOptions_7'],
-                'access'=>(int)$posts['inlineRadioOptions_8']
+                'thickness'=>(int)$posts['thickness'],
+                'intensity'=>(int)$posts['intensity'], 
+                'price_value'=>(int)$posts['price_value'],
+                'look'=>(int)$posts['look'],
+                'all'=>(int)$posts['all'],
+                'atmosphere'=>(int)$posts['atmosphere'],
+                'hospitality'=>(int)$posts['hospitality'],
+                'access'=>(int)$posts['access']
             ]);
         });
 
@@ -133,35 +130,8 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $posts = $request->all();
-        $image = $request->file('image');
-
-        $path = \Storage::put('/public', $image);
-        $path = explode('/', $path);
 
         DB::transaction(function() use($posts){
-            Post::where('id', $posts['post_id'])->update(['content'=>$posts['content']]);
-            MemoTag::where('memo_id', '=', $posts['memo_id'])->delete();
-
-            // 新規タグが入力されているかチェック
-            $tag_exist=Tag::where('user_id', '=', \Auth::id())->where('name', '=', $posts['new_tag'])->exists();
-
-            // 新規タグがすでにtagsテーブルに存在するのかチェック
-            if(!empty($posts['new_tag']) && !$tag_exist){
-                // tagsにインサートしてid取得
-                $tag_id = Tag::insertGetId(['user_id'=>\Auth::id(), 'name'=>$posts['new_tag']]);
-                // memo_tagsにインサートして紐付け
-                MemoTag::insert(['memo_id'=>$posts['memo_id'], 'tag_id'=>$tag_id]);
-            }
-
-            if(!empty($posts['tags'][0])){
-                foreach($posts['tags'] as $tag){
-                    MemoTag::insert(['memo_id'=>$posts['memo_id'], 'tag_id'=>$tag]);
-                }
-            }
-        });
-        return redirect(route('home'));
-
-        DB::transaction(function() use($posts, $path) {
             // 存在確認
             $shop_exist=Shop::where('name', '=', $posts['shop'])->exists();
 
@@ -178,36 +148,46 @@ class HomeController extends Controller
             $kind = Menu::getKind($posts['kind']);
 
             // 存在確認
-            $menu_exist=Shop::where('name', '=', $posts['menu'])->exists();
+            $menu_exist=Menu::where('name', '=', $posts['menu'])->where('shop_id', '=', $shop_id)->exists();
 
             // menu_idを取得
             if(!$menu_exist){
                 $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind]);
             }else{
-                $menu = Menu::select('shops.*')
+                $menu = Menu::select('menus.*')
                 ->where('name', '=', $posts['menu'])
                 ->get();
                 $menu_id = $menu[0]['id'];
             }
-    
-            Post::insert([
-                'user_id'=>\Auth::id(),
+
+            Post::where('id', $posts['post_id'])->update([
                 'shop_id'=>$shop_id,
                 'menu_id'=>$menu_id,
                 'content'=>$posts['content'],
-                'image'=>$path[1], 
                 'price'=>(int)$posts['price'],
-                'thickness'=>(int)$posts['inlineRadioOptions_1'],
-                'intensity'=>(int)$posts['inlineRadioOptions_2'], 
-                'price_value'=>(int)$posts['inlineRadioOptions_3'],
-                'look'=>(int)$posts['inlineRadioOptions_4'],
-                'all'=>(int)$posts['inlineRadioOptions_5'],
-                'atmosphere'=>(int)$posts['inlineRadioOptions_6'],
-                'hospitality'=>(int)$posts['inlineRadioOptions_7'],
-                'access'=>(int)$posts['inlineRadioOptions_8']
+                'thickness'=>(int)$posts['thickness'],
+                'intensity'=>(int)$posts['intensity'], 
+                'price_value'=>(int)$posts['price_value'],
+                'look'=>(int)$posts['look'],
+                'all'=>(int)$posts['all'],
+                'atmosphere'=>(int)$posts['atmosphere'],
+                'hospitality'=>(int)$posts['hospitality'],
+                'access'=>(int)$posts['access']
             ]);
         });
+        return redirect(route('home'));
+    }
 
+
+    public function destroy(Request $request)
+    {
+        $posts = $request->all();
+
+        DB::transaction(function() use($posts){
+            Post::where('id', $posts['post_id'])->update([
+                'deleted_at' => date("Y-m-d H:i:s", time())
+            ]);
+        });
         return redirect(route('home'));
     }
 }
