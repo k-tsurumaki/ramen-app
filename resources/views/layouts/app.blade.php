@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('javascript')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" 
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" 
+    crossorigin="anonymous"/>
+    <link href="/css/layout.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -52,13 +57,13 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="home">ホーム</a>
+                                <a class="nav-link" href="{{ route('home') }}">ホーム</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="timeline">タイムライン</a>
+                                <a class="nav-link" href="{{ route('timeline') }}">タイムライン</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="create">新規投稿</a>
+                                <a class="nav-link" href="{{ route('create') }}">新規投稿</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
