@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="text-center">
-            <h3>ユーザー名</h3>
+            <h3>{{ Auth::user()->name }}</h3>
             <br>
             <img src="..." alt="ユーザーアイコン" class="img-thumbnail">
         </div>

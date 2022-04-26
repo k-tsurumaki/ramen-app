@@ -17,20 +17,35 @@
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="shop" placeholder="店名" value="{{ $shop_name }}"/>
         </div>
+        @error('shop')
+            <div class="alert alert-danger">店名を入力してください</div>
+        @enderror
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="menu" placeholder="メニュー名" value="{{ $menu_name }}"/>
         </div>
+        @error('menu')
+            <div class="alert alert-danger">メニュー名を入力してください</div>
+        @enderror
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="price" placeholder="値段(円)" value="{{ $edit_post['price'] }}"/>
         </div>
+        @error('price')
+            <div class="alert alert-danger">値段を入力してください</div>
+        @enderror
         <div class="form-group mb-3" >
             <textarea class="form-control" name="content" rows="3" placeholder="本文を入力" >{{$edit_post['content']}}</textarea>
         </div>
+        @error('content')
+            <div class="alert alert-danger">本文を入力してください</div>
+        @enderror
         <select class="form-select mb-3" name="kind" aria-label="Default select example">
         @foreach ($menu_kind_list as $kind_number => $kind_name)
             <option value={{$kind_number}} {{ ($kind_number === $menu_kind_number) ? 'selected' : '' }}>{{$kind_name}}</option>
         @endforeach
         </select>
+        @error('kind')
+            <div class="alert alert-danger">種類を選択してください</div>
+        @enderror
         <div>
             <h5>ラーメンについて</h5>
             <div class="mb-3 text-center">
@@ -44,6 +59,9 @@
             @endfor
                 <p style="display:inline">こってり</p>
             </div>
+            @error('intensity')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>麺の太さ</p>
@@ -56,6 +74,9 @@
             @endfor
                 <p style="display:inline">太い</p>
             </div>
+            @error('thickness')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>値段</p>
@@ -68,6 +89,9 @@
             @endfor
                 <p style="display:inline">高い</p>
             </div>
+            @error('price_value')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>見た目</p>
@@ -80,6 +104,9 @@
             @endfor
                 <p style="display:inline">良い</p>
             </div>
+            @error('look')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>総合評価</p>
@@ -92,6 +119,9 @@
             @endfor
                 <p style="display:inline">良い</p>
             </div>
+            @error('all')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
         </div>
         <div>
@@ -107,6 +137,9 @@
             @endfor
                 <p style="display:inline">にぎやか</p>
             </div>
+            @error('atmosphere')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>接客</p>
@@ -119,6 +152,9 @@
             @endfor
                 <p style="display:inline">良い</p>
             </div>
+            @error('hospitality')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
             <div class="mb-3 text-center">
                 <p>アクセス</p>
@@ -131,6 +167,9 @@
             @endfor
                 <p style="display:inline">良い</p>
             </div>
+            @error('access')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
             <br>
         </div>
 

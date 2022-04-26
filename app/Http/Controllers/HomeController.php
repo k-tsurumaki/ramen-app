@@ -71,6 +71,22 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $posts = $request->all();
+        $request->validate([
+            'image'=>'required',
+            'shop'=>'required',
+            'menu'=>'required',
+            'price'=>'required',
+            'content'=>'required',
+            'kind'=>'required',
+            'intensity'=>'required',
+            'thickness'=>'required',
+            'price_value'=>'required',
+            'look'=>'required',
+            'all'=>'required',
+            'atmosphere'=>'required',
+            'hospitality'=>'required',
+            'access'=>'required'
+        ]);
         $image = $request->file('image');
 
         $path = \Storage::put('/public', $image);
@@ -131,7 +147,21 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $posts = $request->all();
-
+        $request->validate([
+            'shop'=>'required',
+            'menu'=>'required',
+            'price'=>'required',
+            'content'=>'required',
+            'kind'=>'required',
+            'intensity'=>'required',
+            'thickness'=>'required',
+            'price_value'=>'required',
+            'look'=>'required',
+            'all'=>'required',
+            'atmosphere'=>'required',
+            'hospitality'=>'required',
+            'access'=>'required'
+        ]);
         DB::transaction(function() use($posts){
             // 存在確認
             $shop_exist=Shop::where('name', '=', $posts['shop'])->exists();
