@@ -31,7 +31,7 @@
             <div class="alert alert-danger">メニュー名を入力してください</div>
         @enderror
         <div class="form-group mb-3" >
-            <input type="text" class="form-control" name="price" placeholder="値段(円)" value="{{ $edit_post['price'] }}"/>
+            <input type="number" class="form-control" name="price" placeholder="値段(円)" value="{{ $edit_post['price'] }}"/>
         </div>
         @error('price')
             <div class="alert alert-danger">値段を入力してください</div>
