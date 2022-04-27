@@ -25,3 +25,4 @@ Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/update', [HomeController::class, 'update'])->name('update');
 Route::post('/destroy', [HomeController::class, 'destroy'])->name('destroy');
+Route::post('/search', [HomeController::class, 'search'])->name('search');
