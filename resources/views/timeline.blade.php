@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post['shop'] }}</h5>
                             <p class="card-text">{{ $post['content'] }}</p>
-                            <a href="/edit/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
+                            <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>
                     </div>
                 @endforeach

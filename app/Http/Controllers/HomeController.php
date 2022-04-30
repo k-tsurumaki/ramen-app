@@ -33,6 +33,7 @@ class HomeController extends Controller
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->where('posts.user_id', '=', \Auth::id())
             ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
             ->get();
                 
         return view('home', compact('posts'));
@@ -44,6 +45,7 @@ class HomeController extends Controller
         $posts = Post::select('posts.*', 'shops.name AS shop')
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
             ->get();
                 
         return view('timeline', compact('posts'));
@@ -53,6 +55,20 @@ class HomeController extends Controller
     {
         $menu_kind_list = Menu::getKindList();
         return view('create', compact('menu_kind_list'));
+    }
+
+    public function detailPost($id)
+    {
+        $edit_post = Post::find($id);
+        $shop = Shop::find($edit_post['shop_id']);
+        $shop_name = $shop['name'];
+        $menu = Menu::find($edit_post['menu_id']);
+        $menu_name = $menu['name'];
+
+        $menu_kind_number = Menu::getKindNumber($menu['kind']);
+        $menu_kind_list = Menu::getKindList();
+
+        return view('detail_post', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
     }
 
     public function edit($id)
