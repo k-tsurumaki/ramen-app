@@ -16,7 +16,8 @@
                     <div class="card" style="width: 18rem;">
                         <img src="{{ '/storage/'.$post['image'] }}" class="card-img-top" alt="ラーメン画像">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $post['shop'] }}</h5>
+                            <h5 class="card-title">{{ $post['shop_name'] }}</h5>
+                            <p class="card-text">{{ $post['user_name'] }}</p>
                             <p class="card-text">{{ $post['content'] }}</p>
                             <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>

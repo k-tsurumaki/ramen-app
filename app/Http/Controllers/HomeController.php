@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*', 'shops.name AS shop')
+        $posts = Post::select('posts.*', 'shops.name AS shop_name')
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->where('posts.user_id', '=', \Auth::id())
             ->whereNull('posts.deleted_at')
@@ -42,7 +42,8 @@ class HomeController extends Controller
     public function timeline()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*', 'shops.name AS shop')
+        $posts = Post::select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->whereNull('posts.deleted_at')
             ->orderBy('created_at', 'DESC')
@@ -243,10 +244,10 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
-    public function searchByUserId(Request $request)
+    public function searchByUserId(Request $request) // 個人ページでの検索
     {
         // 検索フォームで入力された値を取得する
-        $search_user_id = $request->input('search_user_id');
+        $search_user_id = $request->input('search_user_id'); // user_id
         $search_shop = $request->input('search_shop');   // 店名
         $search_content = $request->input('search_content');   // キーワード
 
@@ -267,7 +268,8 @@ class HomeController extends Controller
             if(isset($search_content)){
                 $search_content_results = $search_shop_result
                     ->posts()
-                    ->select('posts.*', 'shops.name AS shop')
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
                     ->where('posts.user_id', '=', $search_user_id)
                     ->where('content', 'LIKE',"%$search_content%")
@@ -279,7 +281,8 @@ class HomeController extends Controller
             else{
                 $search_content_results = $search_shop_result
                     ->posts()
-                    ->select('posts.*', 'shops.name AS shop')
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
                     ->where('posts.user_id', '=', $search_user_id)
                     ->whereNull('posts.deleted_at')
@@ -298,7 +301,7 @@ class HomeController extends Controller
         return view('search', compact('search_results'));
     }
 
-    public function search(Request $request)
+    public function search(Request $request) // タイムラインでの検索
     {
         // 検索フォームで入力された値を取得する
         $search_shop = $request->input('search_shop');   // 店名
@@ -321,7 +324,8 @@ class HomeController extends Controller
             if(isset($search_content)){
                 $search_content_results = $search_shop_result
                     ->posts()
-                    ->select('posts.*', 'shops.name AS shop')
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
                     ->where('content', 'LIKE',"%$search_content%")
                     ->whereNull('posts.deleted_at')
@@ -332,7 +336,8 @@ class HomeController extends Controller
             else{
                 $search_content_results = $search_shop_result
                     ->posts()
-                    ->select('posts.*', 'shops.name AS shop')
+                    ->select('posts.*', 'users.name AS user_name', 'shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
                     ->whereNull('posts.deleted_at')
                     ->orderBy('updated_at', 'DESC')

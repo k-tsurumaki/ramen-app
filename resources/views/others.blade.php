@@ -17,7 +17,7 @@
                     <div class="card" style="width: 18rem;">
                         <img src="{{ '/storage/'.$post['image'] }}" class="card-img-top" alt="ラーメン画像">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $post['shop'] }}</h5>
+                            <h5 class="card-title">{{ $post['shop_name'] }}</h5>
                             <p class="card-text">{{ $post['content'] }}</p>
                             <a href="/edit/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        @include('includes.profile')
+        @include('includes.profile', ['user_id' => $user_id])
     </div>
 </div>
 @endsection
