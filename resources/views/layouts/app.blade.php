@@ -19,9 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" 
-    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" 
-    crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/5a730354b8.js" crossorigin="anonymous"></script>
     <link href="/css/layout.css" rel="stylesheet">
 </head>
 <body>
@@ -93,4 +91,5 @@
         </main>
     </div>
 </body>
+<footer class="footer">ramen</footer>
 </html>

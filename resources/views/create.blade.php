@@ -8,7 +8,7 @@
     <form class="card-body" action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input class="mb-3" type="file" name="image" value = "{{ old('image') }}">
-        @error('shop')
+        @error('image')
             <div class="alert alert-danger">画像ファイルを選択してください</div>
         @enderror
         <div class="form-group mb-3" >

@@ -20,3 +20,14 @@
     width: 266px;
 	height: 266px;
 }
+
+.icon{
+    width: 50%;
+	height: 50%;
+}
+
+footer.footer{
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+}

@@ -17,7 +17,11 @@
                         <img src="{{ '/storage/'.$post['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post['shop_name'] }}</h5>
+                        @if($post['user_id']==Auth::user()->id)
+                            <a href="/home" class="card-text">{{ $post['user_name'] }}</a>
+                        @else
                             <a href="/others/{{$post['user_id']}}" class="card-text">{{ $post['user_name'] }}</a>
+                        @endif
                             <p class="card-text elipsis">{{ $post['content'] }}</p>
                             <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>

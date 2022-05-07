@@ -53,7 +53,7 @@ class HomeController extends Controller
             ->where('posts.user_id', '=', $id)
             ->whereNull('posts.deleted_at')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(6);
                 
         return view('others', compact('posts', 'user'));
     }
@@ -250,6 +250,29 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
+    public function update_profile(Request $request)
+    {
+        $user = $request->all();
+
+        $request->validate([
+            'name'=>'required',
+            'image'=>'required'
+        ]);
+
+        $image = $request->file('image');
+
+        $path = \Storage::put('/public', $image);
+        $path = explode('/', $path);
+
+        DB::transaction(function() use($user, $path){
+            User::where('id', \Auth::id())->update([
+                'name'=>$user['name'],
+                'image'=>$path[1]
+            ]);
+        });
+        return redirect(route('home'));
+    }
+
 
     public function destroy(Request $request)
     {
@@ -374,5 +397,10 @@ class HomeController extends Controller
         }
 
         return view('search', compact('search_results'));
+    }
+
+    public function edit_profile()
+    {
+        return view('edit_profile');
     }
 }
