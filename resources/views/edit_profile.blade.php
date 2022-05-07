@@ -14,7 +14,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">ユーザー名</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" placeholder="ユーザー名" value = "{{ old('name') }}">
+                                <input type="text" class="form-control" name="name" placeholder="ユーザー名" value = "{{ Auth::user()->name }}">
                             @error('name')
                                 <div class="alert alert-danger">ユーザー名を入力してください</div>
                             @enderror

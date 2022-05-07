@@ -22,9 +22,9 @@
                         </div>
                     </div>
                 @endforeach
-                    <div class='paginate'>
-                        {{ $posts->links() }}
-                    </div>
+                </div>
+                <div class='paginate mt-3'>
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>
