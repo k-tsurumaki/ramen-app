@@ -9,6 +9,7 @@ use App\Models\Shop;
 use App\Models\Menu;
 use DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -29,13 +30,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $post = new Post;
+
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
         $posts = Post::select('posts.*', 'shops.name AS shop_name')
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->where('posts.user_id', '=', \Auth::id())
             ->whereNull('posts.deleted_at')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(6);
                 
         return view('home', compact('posts'));
     }
@@ -62,7 +66,7 @@ class HomeController extends Controller
             ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
             ->whereNull('posts.deleted_at')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(6);
                 
         return view('timeline', compact('posts'));
     }
