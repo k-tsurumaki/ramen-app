@@ -17,7 +17,11 @@
                         <img src="{{ '/storage/'.$search_result['image'] }}" class="card-img-top" alt="ラーメン画像">
                         <div class="card-body">
                             <h5 class="card-title">{{ $search_result['shop_name'] }}</h5>
+                        @if($search_result['user_id']==Auth::id())
+                            <p class="card-text">　</p>
+                        @else
                             <p class="card-text">{{ $search_result['user_name'] }}</p>
+                        @endif
                             <p class="card-text">{{ $search_result['content'] }}</p>
                             <a href="/detail_post/{{ $search_result['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>
@@ -27,8 +31,10 @@
             </div>
         </div>
     </div>
+@if(isset($search_user_result))
     <div class="col-md-3">
-        @include('includes.profile')
+        @include('includes.profile', ['user' => $search_user_result])
     </div>
+@endif
 </div>
 @endsection

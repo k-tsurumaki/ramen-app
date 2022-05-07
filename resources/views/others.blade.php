@@ -3,7 +3,7 @@
 @section('content')
 <div class="row mx-3">
     <div class="col-md-3">
-        @include('includes.search_home', ['user_id' => $user_id])
+        @include('includes.search_home', ['user_id' => $user->id])
     </div>
     <div class="col-md-6">
         <div class="card mb-3">
@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post['shop_name'] }}</h5>
                             <p class="card-text">{{ $post['content'] }}</p>
-                            <a href="/edit/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
+                            <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
                         </div>
                     </div>
                 @endforeach
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        @include('includes.profile', ['user_id' => $user_id])
+        @include('includes.profile', ['user' => $user])
     </div>
 </div>
 @endsection

@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        @include('includes.profile')
+        @include('includes.profile', ['user' => Auth::user()])
     </div>
 </div>
 @endsection

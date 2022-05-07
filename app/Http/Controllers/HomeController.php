@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Post;
 use App\Models\Shop;
 use App\Models\Menu;
@@ -37,6 +38,20 @@ class HomeController extends Controller
             ->get();
                 
         return view('home', compact('posts'));
+    }
+
+    public function others($id)
+    {
+        $user = User::find($id); 
+        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        $posts = Post::select('posts.*', 'shops.name AS shop_name')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->where('posts.user_id', '=', $id)
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+                
+        return view('others', compact('posts', 'user'));
     }
 
     public function timeline()
@@ -259,6 +274,8 @@ class HomeController extends Controller
         }
 
         // 検索結果を取得
+        $search_user_result = User::find($search_user_id);
+
         $search_shop_results = $query_shops->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
 
         $search_results = array();
@@ -298,7 +315,7 @@ class HomeController extends Controller
             } 
         }
 
-        return view('search', compact('search_results'));
+        return view('search', compact('search_results', 'search_user_result'));
     }
 
     public function search(Request $request) // タイムラインでの検索
