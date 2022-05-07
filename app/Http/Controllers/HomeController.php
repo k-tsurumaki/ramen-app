@@ -121,6 +121,7 @@ class HomeController extends Controller
             'look'=>'required',
             'all'=>'required',
             'atmosphere'=>'required',
+            'speed'=>'required',
             'hospitality'=>'required',
             'access'=>'required'
         ]);
@@ -173,6 +174,7 @@ class HomeController extends Controller
                 'look'=>(int)$posts['look'],
                 'all'=>(int)$posts['all'],
                 'atmosphere'=>(int)$posts['atmosphere'],
+                'speed'=>(int)$posts['speed'],
                 'hospitality'=>(int)$posts['hospitality'],
                 'access'=>(int)$posts['access']
             ]);
@@ -196,6 +198,7 @@ class HomeController extends Controller
             'look'=>'required',
             'all'=>'required',
             'atmosphere'=>'required',
+            'speed'=>'required',
             'hospitality'=>'required',
             'access'=>'required'
         ]);
@@ -241,6 +244,7 @@ class HomeController extends Controller
                 'look'=>(int)$posts['look'],
                 'all'=>(int)$posts['all'],
                 'atmosphere'=>(int)$posts['atmosphere'],
+                'speed'=>(int)$posts['speed'],
                 'hospitality'=>(int)$posts['hospitality'],
                 'access'=>(int)$posts['access']
             ]);

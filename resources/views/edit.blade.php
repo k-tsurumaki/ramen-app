@@ -146,6 +146,21 @@
             @enderror
             <br>
             <div class="mb-3 text-center">
+                <p>提供スピード</p>
+                <p style="display:inline">遅い</p>
+            @for ($i = 1; $i < 6; $i++)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="speed" id="inlineRadio{{$i}}" value={{$i}} {{ ($i === $edit_post['speed']) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="inlineRadio{{$i}}">{{$i}}</label>
+                </div>
+            @endfor
+                <p style="display:inline">早い</p>
+            </div>
+            @error('speed')
+                <div class="alert alert-danger">選択してください</div>
+            @enderror
+            <br>
+            <div class="mb-3 text-center">
                 <p>接客</p>
                 <p style="display:inline">悪い</p>
             @for ($i = 1; $i < 6; $i++)

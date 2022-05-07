@@ -7,7 +7,7 @@
 @section('content')
 <div class="card  mx-auto" style="width: 33%;">
     <div class="card-header d-flex justify-content-between">
-        編集
+        詳細
         <form id="edit-form" action="/edit/{{$edit_post['id']}}" method="GET">
             @csrf
             <input type="hidden" name="post_id" value="{{ $edit_post['id'] }}"/>
@@ -18,7 +18,7 @@
     </div>
     <form class="card-body" action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <img src="{{ '/storage/'.$edit_post['image'] }}" class='img-fluid mb-3 mx-auto d-block'/>
+        <img src="{{ '/storage/'.$edit_post['image'] }}" class='mb-3 mx-auto d-block img'/>
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="shop" placeholder="店名" value="{{ $shop_name }}" disabled/>
         </div>
@@ -111,6 +111,18 @@
                 </div>
             @endfor
                 <p style="display:inline">にぎやか</p>
+            </div>
+            <br>
+            <div class="mb-3 text-center">
+                <p>提供スピード</p>
+                <p style="display:inline">遅い</p>
+            @for ($i = 1; $i < 6; $i++)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="speed" id="inlineRadio{{$i}}" value={{$i}} {{ ($i === $edit_post['speed']) ? 'checked' : '' }} disabled>
+                    <label class="form-check-label" for="inlineRadio{{$i}}">{{$i}}</label>
+                </div>
+            @endfor
+                <p style="display:inline">早い</p>
             </div>
             <br>
             <div class="mb-3 text-center">
