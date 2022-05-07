@@ -8,3 +8,12 @@ function deleteHandle(event){
         alert('削除をキャンセルしました');
     }
 }
+
+function editHandle(event){
+    //フォームをいったんストップ
+    event.preventDefault();
+    if(window.confirm('編集しますか？')){ 
+        //OKならフォームを再開
+        document.getElementById('edit-form').submit();
+    }
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Post;
 use App\Models\Shop;
 use App\Models\Menu;
@@ -29,23 +30,40 @@ class HomeController extends Controller
     public function index()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'DESC')
+        $posts = Post::select('posts.*', 'shops.name AS shop_name')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->where('posts.user_id', '=', \Auth::id())
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
             ->get();
-        
+                
         return view('home', compact('posts'));
+    }
+
+    public function others($id)
+    {
+        $user = User::find($id); 
+        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        $posts = Post::select('posts.*', 'shops.name AS shop_name')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->where('posts.user_id', '=', $id)
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+                
+        return view('others', compact('posts', 'user'));
     }
 
     public function timeline()
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*')
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'DESC')
+        $posts = Post::select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
             ->get();
-        
+                
         return view('timeline', compact('posts'));
     }
 
@@ -53,6 +71,20 @@ class HomeController extends Controller
     {
         $menu_kind_list = Menu::getKindList();
         return view('create', compact('menu_kind_list'));
+    }
+
+    public function detailPost($id)
+    {
+        $edit_post = Post::find($id);
+        $shop = Shop::find($edit_post['shop_id']);
+        $shop_name = $shop['name'];
+        $menu = Menu::find($edit_post['menu_id']);
+        $menu_name = $menu['name'];
+
+        $menu_kind_number = Menu::getKindNumber($menu['kind']);
+        $menu_kind_list = Menu::getKindList();
+
+        return view('detail_post', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
     }
 
     public function edit($id)
@@ -227,7 +259,66 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
-    public function search(Request $request)
+    public function searchByUserId(Request $request) // 個人ページでの検索
+    {
+        // 検索フォームで入力された値を取得する
+        $search_user_id = $request->input('search_user_id'); // user_id
+        $search_shop = $request->input('search_shop');   // 店名
+        $search_content = $request->input('search_content');   // キーワード
+
+        $query_shops = Shop::query();
+
+        // まず店名で検索
+        if(isset($search_shop)){
+            $query_shops->where('name', 'LIKE',"%$search_shop%");
+        }
+
+        // 検索結果を取得
+        $search_user_result = User::find($search_user_id);
+
+        $search_shop_results = $query_shops->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
+
+        $search_results = array();
+
+        foreach($search_shop_results as $search_shop_result){
+            // もしキーワードが入力されていたら
+            if(isset($search_content)){
+                $search_content_results = $search_shop_result
+                    ->posts()
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+                    ->where('posts.user_id', '=', $search_user_id)
+                    ->where('content', 'LIKE',"%$search_content%")
+                    ->whereNull('posts.deleted_at')
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+            } 
+            // キーワードが入力されていなければ
+            else{
+                $search_content_results = $search_shop_result
+                    ->posts()
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+                    ->where('posts.user_id', '=', $search_user_id)
+                    ->whereNull('posts.deleted_at')
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+            } 
+
+            if(!empty($search_content_results)){
+                foreach($search_content_results as $search_content_result)
+                {
+                    array_push($search_results, $search_content_result);
+                }
+            } 
+        }
+
+        return view('search', compact('search_results', 'search_user_result'));
+    }
+
+    public function search(Request $request) // タイムラインでの検索
     {
         // 検索フォームで入力された値を取得する
         $search_shop = $request->input('search_shop');   // 店名
@@ -248,11 +339,26 @@ class HomeController extends Controller
         foreach($search_shop_results as $search_shop_result){
             // もしキーワードが入力されていたら
             if(isset($search_content)){
-                $search_content_results = $search_shop_result->posts()->where('content', 'LIKE',"%$search_content%")->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
+                $search_content_results = $search_shop_result
+                    ->posts()
+                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+                    ->where('content', 'LIKE',"%$search_content%")
+                    ->whereNull('posts.deleted_at')
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
             } 
             // キーワードが入力されていなければ
             else{
-                $search_content_results = $search_shop_result->posts()->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
+                $search_content_results = $search_shop_result
+                    ->posts()
+                    ->select('posts.*', 'users.name AS user_name', 'shops.name AS shop_name')
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+                    ->whereNull('posts.deleted_at')
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
             } 
 
             if(!empty($search_content_results)){
@@ -262,7 +368,6 @@ class HomeController extends Controller
                 }
             } 
         }
-
 
         return view('search', compact('search_results'));
     }

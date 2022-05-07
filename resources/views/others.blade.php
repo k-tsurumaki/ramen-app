@@ -3,7 +3,7 @@
 @section('content')
 <div class="row mx-3">
     <div class="col-md-3">
-        @include('includes.search_home', ['user_id' => Auth::user()->id ])
+        @include('includes.search_home', ['user_id' => $user->id])
     </div>
     <div class="col-md-6">
         <div class="card mb-3">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        @include('includes.profile', ['user' => Auth::user()])
+        @include('includes.profile', ['user' => $user])
     </div>
 </div>
 @endsection
