@@ -10,17 +10,17 @@
             <div class="card-header">
                 タイムライン
             </div>
-            <div class="card-body">
+            <div class="card-body my-card-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($posts as $post)
                     <div class="card" style="width: 18rem;">
                         <img src="{{ '/storage/'.$post['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
-                            <a href="/shop/{{ $post['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $post['shop_name'] }}</h5></a>
+                            <a href="/shop/{{ $post['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $post->shop->name }}</h5></a>
                         @if($post['user_id']==Auth::user()->id)
-                            <a href="/home" class="card-text">{{ $post['user_name'] }}</a>
+                            <a href="/home" class="card-text">{{ $post->user->name }}</a>
                         @else
-                            <a href="/others/{{$post['user_id']}}" class="card-text">{{ $post['user_name'] }}</a>
+                            <a href="/others/{{$post['user_id']}}" class="card-text">{{ $post->user->name }}</a>
                         @endif
                             <p class="card-text elipsis">{{ $post['content'] }}</p>
                             <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>

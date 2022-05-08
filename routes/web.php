@@ -20,12 +20,13 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/timeline', [HomeController::class, 'timeline'])->name('timeline');
 Route::get('/create', [HomeController::class, 'create'])->name('create');
-Route::get('/detail_post/{id}', [HomeController::class, 'detailPost'])->name('detailPost');
+Route::get('/detail_post/{id}', [HomeController::class, 'detail_post'])->name('detail_post');
 Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::get('/others/{id}', [HomeController::class, 'others'])->name('others');
 Route::get('/edit_profile', [HomeController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/shop/{id}', [HomeController::class, 'shop'])->name('shop');
-
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/search_by_user_id', [HomeController::class, 'search_by_user_id'])->name('search_by_user_id');
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/update', [HomeController::class, 'update'])->name('update');

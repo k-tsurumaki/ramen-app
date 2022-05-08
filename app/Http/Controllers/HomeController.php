@@ -52,31 +52,15 @@ class HomeController extends Controller
     {
         return view('create')->with(['menu_kind_list' => $menu->getKindList()]);
     }
-
-    public function detailPost(Shop $shop, Menu $menu, $id)
+    
+    public function detail_post(Post $post, Shop $shop, Menu $menu, $id)
     {
-        $edit_post = Post::find($id);
-        $shop_name = $shop->getShopName($edit_post['shop_id']);
-        $menu_name = $menu->getMenuName($edit_post['menu_id']);
-
-        $menu_data = Menu::find($edit_post['menu_id']);
-        $menu_kind_number = $menu_data->getKindNumber($menu_data['kind']);
-        $menu_kind_list = $menu_data->getKindList();
-
-        return view('detail_post', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
+        return view('edit')->with(['detail' => $post->getDetailPost($id, $shop, $menu)]);
     }
 
-    public function edit(Shop $shop, Menu $menu, $id)
+    public function edit(Post $post, Shop $shop, Menu $menu, $id)
     {
-        $edit_post = Post::find($id);
-        $shop_name = $shop->getShopName($edit_post['shop_id']);
-        $menu_name = $menu->getMenuName($edit_post['menu_id']);
-
-        $menu_data = Menu::find($edit_post['menu_id']);
-        $menu_kind_number = $menu_data->getKindNumber($menu_data['kind']);
-        $menu_kind_list = $menu_data->getKindList();
-
-        return view('edit', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
+        return view('edit')->with(['detail' => $post->getDetailPost($id, $shop, $menu)]);
     }
 
     public function store(Request $request)
@@ -264,117 +248,15 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
-    public function search_by_user_id(Request $request) // 個人ページでの検索
+    
+    public function search(Post $post, Request $request) // タイムラインでの検索
     {
-        // 検索フォームで入力された値を取得する
-        $search_user_id = $request->input('search_user_id'); // user_id
-        $search_shop = $request->input('search_shop');   // 店名
-        $search_content = $request->input('search_content');   // キーワード
-
-        $query_shops = Shop::query();
-
-        // まず店名で検索
-        if(isset($search_shop)){
-            $query_shops->where('name', 'LIKE',"%$search_shop%");
-        }
-
-        // 検索結果を取得
-        $search_user_result = User::find($search_user_id);
-
-        $search_shop_results = $query_shops->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
-
-        $search_results = array();
-
-        foreach($search_shop_results as $search_shop_result){
-            // もしキーワードが入力されていたら
-            if(isset($search_content)){
-                $search_content_results = $search_shop_result
-                    ->posts()
-                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
-                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-                    ->where('posts.user_id', '=', $search_user_id)
-                    ->where('content', 'LIKE',"%$search_content%")
-                    ->whereNull('posts.deleted_at')
-                    ->orderBy('updated_at', 'DESC')
-                    ->get();
-            } 
-            // キーワードが入力されていなければ
-            else{
-                $search_content_results = $search_shop_result
-                    ->posts()
-                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
-                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-                    ->where('posts.user_id', '=', $search_user_id)
-                    ->whereNull('posts.deleted_at')
-                    ->orderBy('updated_at', 'DESC')
-                    ->get();
-            } 
-
-            if(!empty($search_content_results)){
-                foreach($search_content_results as $search_content_result)
-                {
-                    array_push($search_results, $search_content_result);
-                }
-            } 
-        }
-
-        return view('search', compact('search_results', 'search_user_result'));
+        return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, true, 6)]);
     }
 
-    public function search(Request $request) // タイムラインでの検索
+    public function search_by_user_id(Post $post, Request $request) // 個人ページでの検索
     {
-        // 検索フォームで入力された値を取得する
-        $search_shop = $request->input('search_shop');   // 店名
-        $search_content = $request->input('search_content');   // キーワード
-
-        $query_shops = Shop::query();
-
-        // まず店名で検索
-        if(isset($search_shop)){
-            $query_shops->where('name', 'LIKE',"%$search_shop%");
-        }
-
-        // 検索結果を取得
-        $search_shop_results = $query_shops->whereNull('deleted_at')->orderBy('updated_at', 'DESC')->get();
-
-        $search_results = array();
-
-        foreach($search_shop_results as $search_shop_result){
-            // もしキーワードが入力されていたら
-            if(isset($search_content)){
-                $search_content_results = $search_shop_result
-                    ->posts()
-                    ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
-                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-                    ->where('content', 'LIKE',"%$search_content%")
-                    ->whereNull('posts.deleted_at')
-                    ->orderBy('updated_at', 'DESC')
-                    ->get();
-            } 
-            // キーワードが入力されていなければ
-            else{
-                $search_content_results = $search_shop_result
-                    ->posts()
-                    ->select('posts.*', 'users.name AS user_name', 'shops.name AS shop_name')
-                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-                    ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-                    ->whereNull('posts.deleted_at')
-                    ->orderBy('updated_at', 'DESC')
-                    ->get();
-            } 
-
-            if(!empty($search_content_results)){
-                foreach($search_content_results as $search_content_result)
-                {
-                    array_push($search_results, $search_content_result);
-                }
-            } 
-        }
-
-        return view('search', compact('search_results'));
+        return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, 6)]);
     }
 
     public function edit_profile()
