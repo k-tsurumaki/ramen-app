@@ -5,8 +5,8 @@
     <div class="card-body my-card-body">
         <form class="mb-2 mt-4" method="POST" action="{{ route('search_by_user_id') }}">
             @csrf
-            <input type="hidden" name="search_user_id" value="{{ $user_id }}"/>
-            <h5>店名検索</h5>
+            <input type="hidden" name="search_user_id" value="{{ $shop_id }}"/>
+            <h5>メニュー検索</h5>
             <div class="d-flex justify-content-center mb-3">
                 <input type="search" class="form-control" name="search_shop" placeholder="店名を入力" value="@if (isset($search_shop)) {{ $search_shop }} @endif">
             </div>

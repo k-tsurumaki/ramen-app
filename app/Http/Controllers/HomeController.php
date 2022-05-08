@@ -28,79 +28,53 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-
-        $post = new Post;
-
-        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*', 'shops.name AS shop_name')
-            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-            ->where('posts.user_id', '=', \Auth::id())
-            ->whereNull('posts.deleted_at')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(6);
-                
-        return view('home', compact('posts'));
+    public function index(Post $post)
+    {                
+        return view('home')->with(['posts' => $post->getPaginateUserPosts(6, \Auth::id())]);
     }
 
-    public function others($id)
-    {
-        $user = User::find($id); 
-        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*', 'shops.name AS shop_name')
-            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-            ->where('posts.user_id', '=', $id)
-            ->whereNull('posts.deleted_at')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(6);
-                
-        return view('others', compact('posts', 'user'));
+    public function others(Post $post, $id)
+    {         
+        return view('others')->with(['posts' => $post->getPaginateUserPosts(6, $id), 'user' => User::find($id)]);
     }
 
-    public function timeline()
+    public function timeline(Post $post)
     {
-        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
-        $posts = Post::select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
-            ->whereNull('posts.deleted_at')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(6);
-                
-        return view('timeline', compact('posts'));
+        return view('timeline')->with(['posts' => $post->getPaginate(6)]);
     }
 
-    public function create()
+    public function shop(Post $post, $id)
     {
-        $menu_kind_list = Menu::getKindList();
-        return view('create', compact('menu_kind_list'));
+        return view('shop')->with(['posts' => $post->getPaginateShopPosts(6, $id), 'shop' => Shop::find($id)]);
     }
 
-    public function detailPost($id)
+    public function create(Menu $menu)
+    {
+        return view('create')->with(['menu_kind_list' => $menu->getKindList()]);
+    }
+
+    public function detailPost(Shop $shop, Menu $menu, $id)
     {
         $edit_post = Post::find($id);
-        $shop = Shop::find($edit_post['shop_id']);
-        $shop_name = $shop['name'];
-        $menu = Menu::find($edit_post['menu_id']);
-        $menu_name = $menu['name'];
+        $shop_name = $shop->getShopName($edit_post['shop_id']);
+        $menu_name = $menu->getMenuName($edit_post['menu_id']);
 
-        $menu_kind_number = Menu::getKindNumber($menu['kind']);
-        $menu_kind_list = Menu::getKindList();
+        $menu_data = Menu::find($edit_post['menu_id']);
+        $menu_kind_number = $menu_data->getKindNumber($menu_data['kind']);
+        $menu_kind_list = $menu_data->getKindList();
 
         return view('detail_post', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
     }
 
-    public function edit($id)
+    public function edit(Shop $shop, Menu $menu, $id)
     {
         $edit_post = Post::find($id);
-        $shop = Shop::find($edit_post['shop_id']);
-        $shop_name = $shop['name'];
-        $menu = Menu::find($edit_post['menu_id']);
-        $menu_name = $menu['name'];
+        $shop_name = $shop->getShopName($edit_post['shop_id']);
+        $menu_name = $menu->getMenuName($edit_post['menu_id']);
 
-        $menu_kind_number = Menu::getKindNumber($menu['kind']);
-        $menu_kind_list = Menu::getKindList();
+        $menu_data = Menu::find($edit_post['menu_id']);
+        $menu_kind_number = $menu_data->getKindNumber($menu_data['kind']);
+        $menu_kind_list = $menu_data->getKindList();
 
         return view('edit', compact('edit_post', 'shop_name', 'menu_name', 'menu_kind_number', 'menu_kind_list'));
     }
@@ -290,7 +264,7 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
-    public function searchByUserId(Request $request) // 個人ページでの検索
+    public function search_by_user_id(Request $request) // 個人ページでの検索
     {
         // 検索フォームで入力された値を取得する
         $search_user_id = $request->input('search_user_id'); // user_id

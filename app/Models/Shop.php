@@ -20,4 +20,10 @@ class Shop extends Model
     {
         return $this->hasMany(Menu::class);
     }
+
+    public function getShopName(int $id)
+    {
+        $shop = $this->find($id);
+        return $shop['name'];
+    }
 }

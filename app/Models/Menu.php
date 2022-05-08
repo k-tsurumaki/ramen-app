@@ -16,7 +16,7 @@ class Menu extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public static function getKindList()
+    public function getKindList()
     {
         return  ['醤油', '塩', '豚骨', '味噌', '鶏白湯', 'つけ麺', 'まぜそば・油そば', '家系', '二郎系', 'その他'];
     }
@@ -27,12 +27,18 @@ class Menu extends Model
         return $kind_array[$kind_number];
     }
 
-    public static function getKindNumber($kind)
+    public function getKindNumber($kind)
     {
         $kind_array = ['醤油', '塩', '豚骨', '味噌', '鶏白湯', 'つけ麺', 'まぜそば・油そば', '家系', '二郎系', 'その他'];
 
         // kind_arrayの中からkindを見つけてそのインデックスを返す
         return array_search($kind, $kind_array);
+    }
+
+    public function getMenuName(int $id)
+    {
+        $menu = $this->find($id);
+        return $menu['name'];
     }
 }
 

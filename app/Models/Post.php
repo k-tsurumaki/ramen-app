@@ -24,15 +24,56 @@ class Post extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function getByLimit(int $limit_count = 6)
+    public function getPaginate(int $limit_count = 6)
     {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->limit($limit_count)->get();
+        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        return $this
+            ->select('posts.*', 'users.name AS user_name','shops.name AS shop_name')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
     }
 
-    public function getPaginateByLimit(int $limit_count = 6)
+    public function getPaginateUserPosts(int $limit_count = 6, int $user_id)
     {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        return $this
+            ->select('posts.*', 'shops.name AS shop_name')
+            ->leftJoin('shops', 'shops.id', '=', 'posts.shop_id')
+            ->where('posts.user_id', '=', $user_id)
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
+    }
+
+    public function getPaginateShopPosts(int $limit_count = 6, int $shop_id)
+    {
+        // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        return $this
+            ->select('posts.*', 'users.name AS user_name')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->where('posts.shop_id', '=', $shop_id)
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
+    }
+
+    public function search_shop_and_keyword($request)
+    {
+        $search_content = $request->input('search_content');
+        $search_shop = $request->input('search_shop');
+        $query      = $this->with(['shop']);
+
+        if (isset($search_content)) {
+            $query->where('content', 'LIKE', '%' . $search_content . '%');
+        }
+
+        if (isset($search_shop)) {
+            $query->where('name', 'LIKE', '%' . $search_shop . '%');
+        }
+
+        return $query->paginate(6);
     }
 }
