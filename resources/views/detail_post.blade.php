@@ -29,7 +29,7 @@
             <input type="number" class="form-control" name="price" placeholder="値段(円)" value="{{ $detail['edit_post']['price'] }}" disabled/>
         </div>
         <div class="form-group mb-3" >
-            <textarea class="form-control" name="content" rows="3" placeholder="本文を入力" disabled>{{$detail['edit_post']['content']}}</textarea>
+            <textarea class="form-control" name="content" rows="3" placeholder="投稿文を入力" disabled>{{$detail['edit_post']['content']}}</textarea>
         </div>
         <select class="form-select mb-3" name="kind" aria-label="Default select example">
         @foreach ($detail['menu_kind_list'] as $kind_number => $kind_name)

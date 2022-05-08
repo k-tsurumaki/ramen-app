@@ -55,7 +55,7 @@ class HomeController extends Controller
     
     public function detail_post(Post $post, Shop $shop, Menu $menu, $id)
     {
-        return view('edit')->with(['detail' => $post->getDetailPost($id, $shop, $menu)]);
+        return view('detail_post')->with(['detail' => $post->getDetailPost($id, $shop, $menu)]);
     }
 
     public function edit(Post $post, Shop $shop, Menu $menu, $id)
@@ -251,7 +251,7 @@ class HomeController extends Controller
     
     public function search(Post $post, Request $request) // タイムラインでの検索
     {
-        return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, true, 6)]);
+        return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, 6)]);
     }
 
     public function search_by_user_id(Post $post, Request $request) // 個人ページでの検索

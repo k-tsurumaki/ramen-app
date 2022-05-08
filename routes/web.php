@@ -25,7 +25,7 @@ Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::get('/others/{id}', [HomeController::class, 'others'])->name('others');
 Route::get('/edit_profile', [HomeController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/shop/{id}', [HomeController::class, 'shop'])->name('shop');
-Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/search_by_user_id', [HomeController::class, 'search_by_user_id'])->name('search_by_user_id');
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');

@@ -25,6 +25,11 @@ class Post extends Model
         return $this->belongsTo(Shop::class);
     }
 
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
+
     public function getPaginate(int $limit_count = 6)
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
@@ -70,30 +75,36 @@ class Post extends Model
         return ['edit_post'=>$edit_post, 'shop_name'=>$shop_name, 'menu_name'=>$menu_name, 'menu_kind_number'=>$menu_kind_number, 'menu_kind_list'=>$menu_kind_list];
     }
 
-    public function getPaginateSearchResults($request, bool $isAll = false, int $limit_count = 6, )
+    public function getPaginateSearchResults($request, $limit_count)
     {
         // 検索フォームで入力された値を取得する
         $search_user_id = $request->input('search_user_id');   // ユーザー名
         $search_shop = $request->input('search_shop');   // 店名
         $search_content = $request->input('search_content');   // キーワード
+        $search_kind = $request->input('search_kind');   // 種類
 
-        $search_results = $this
+        // dd(isset($search_user_id));
+
+        return $this
                 ->select('posts.*')
                 ->when(isset($search_shop), function($query) use ($search_shop){
                     $query->whereHas('shop', function($query) use($search_shop){
                         $query->where('name', 'LIKE', "%$search_shop%");
                     });
                 })
+                ->when(($search_kind!=0), function($query) use ($search_kind){
+                    $query->whereHas('menu', function($query) use($search_kind){
+                        $query->where('kind', '=', Menu::getKind($search_kind-1));
+                    });
+                })
                 ->when(isset($search_content), function($query) use($search_content){
                     return $query->where('content', 'LIKE', "%$search_content%");
                 })
-                ->when(!$isAll, function($query) use($search_user_id){
+                ->when(isset($search_user_id), function($query) use($search_user_id){
                     return $query->where('user_id', '=', $search_user_id);
                 })
                 ->whereNull('posts.deleted_at')
-                ->orderBy('updated_at', 'DESC')
+                ->orderBy('created_at', 'DESC')
                 ->paginate($limit_count);
-
-        return $search_results;
     }
 }

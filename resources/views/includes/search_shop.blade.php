@@ -8,9 +8,9 @@
             <input type="hidden" name="search_user_id" value="{{ $shop_id }}"/>
             <h5>メニュー検索</h5>
             <div class="d-flex justify-content-center mb-3">
-                <input type="search" class="form-control" name="search_shop" placeholder="店名を入力" value="@if (isset($search_shop)) {{ $search_shop }} @endif">
+                <input type="search" class="form-control" name="search_shop" placeholder="メニュー名を入力" value="@if (isset($search_shop)) {{ $search_shop }} @endif">
             </div>
-            <h5>本文検索</h5>
+            <h5>投稿文検索</h5>
             <div class="d-flex justify-content-center mb-3">
                 <input type="search" class="form-control" name="search_content" placeholder="キーワードを入力" value="@if (isset($search_content)) {{ $search_content }} @endif">
             </div>

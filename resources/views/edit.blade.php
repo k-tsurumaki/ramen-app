@@ -37,10 +37,10 @@
             <div class="alert alert-danger">値段を入力してください</div>
         @enderror
         <div class="form-group mb-3" >
-            <textarea class="form-control" name="content" rows="3" placeholder="本文を入力" >{{ $detail['edit_post']['content']}}</textarea>
+            <textarea class="form-control" name="content" rows="3" placeholder="投稿文を入力" >{{ $detail['edit_post']['content']}}</textarea>
         </div>
         @error('content')
-            <div class="alert alert-danger">本文を入力してください</div>
+            <div class="alert alert-danger">投稿文を入力してください</div>
         @enderror
         <select class="form-select mb-3" name="kind" aria-label="Default select example">
         @foreach ($detail['menu_kind_list'] as $kind_number => $kind_name)
