@@ -3,7 +3,7 @@
         検索
     </div>
     <div class="card-body my-card-body">
-        <form class="mb-2 mt-4" method="POST" action="{{ route('search_by_user_id') }}">
+        <form class="mb-2 mt-4" method="POST" action="{{ route('search') }}">
             @csrf
             <input type="hidden" name="search_user_id" value="{{ $shop_id }}"/>
             <h5>メニュー検索</h5>

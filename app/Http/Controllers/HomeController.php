@@ -249,12 +249,7 @@ class HomeController extends Controller
     }
 
     
-    public function search(Post $post, Request $request) // タイムラインでの検索
-    {
-        return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, 6)]);
-    }
-
-    public function search_by_user_id(Post $post, Request $request) // 個人ページでの検索
+    public function search(Post $post, Request $request) // 検索
     {
         return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, 6)]);
     }

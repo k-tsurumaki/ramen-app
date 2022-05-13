@@ -33,4 +33,3 @@ Route::post('/update', [HomeController::class, 'update'])->name('update');
 Route::post('/update_profile', [HomeController::class, 'update_profile'])->name('update_profile');
 Route::post('/destroy', [HomeController::class, 'destroy'])->name('destroy');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
-Route::post('/search_by_user_id', [HomeController::class, 'search_by_user_id'])->name('search_by_user_id');

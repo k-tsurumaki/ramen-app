@@ -82,6 +82,24 @@ class Post extends Model
         $search_shop = $request->input('search_shop');   // 店名
         $search_content = $request->input('search_content');   // キーワード
         $search_kind = $request->input('search_kind');   // 種類
+        $intensity = $request->input('intensity');
+        $intensity_limit = $request->input('intensity_limit');
+        $thickness = $request->input('thickness');
+        $thickness_limit = $request->input('thickness_limit');
+        $price_value = $request->input('price_value');
+        $price_value_limit = $request->input('price_value_limit');
+        $look = $request->input('look');
+        $look_limit = $request->input('look_limit');
+        $all = $request->input('all');
+        $all_limit = $request->input('all_limit');
+        $atmosphere = $request->input('atmosphere');
+        $atmosphere_limit = $request->input('atmosphere_limit');
+        $speed = $request->input('speed');
+        $speed_limit = $request->input('speed_limit');
+        $hospitality = $request->input('hospitality');
+        $hospitality_limit = $request->input('hospitality_limit');
+        $access = $request->input('access');
+        $access_limit = $request->input('access_limit');
 
         // dd(isset($search_user_id));
 
@@ -102,6 +120,96 @@ class Post extends Model
                 })
                 ->when(isset($search_user_id), function($query) use($search_user_id){
                     return $query->where('user_id', '=', $search_user_id);
+                })
+                ->when(true, function($query) use($intensity, $intensity_limit){
+                    if($intensity_limit==='1')
+                    {
+                        return $query->where('intensity', '>=', $intensity);
+                    }
+                    else
+                    {
+                        return $query->where('intensity', '<=', $intensity);
+                    }
+                })
+                ->when(true, function($query) use($thickness, $thickness_limit){
+                    if($thickness_limit==='1')
+                    {
+                        return $query->where('thickness', '>=', $thickness);
+                    }
+                    else
+                    {
+                        return $query->where('thickness', '<=', $thickness);
+                    }
+                })
+                ->when(true, function($query) use($price_value, $price_value_limit){
+                    if($price_value_limit==='1')
+                    {
+                        return $query->where('price_value', '>=', $price_value);
+                    }
+                    else
+                    {
+                        return $query->where('price_value', '<=', $price_value);
+                    }
+                })
+                ->when(true, function($query) use($look, $look_limit){
+                    if($look_limit==='1')
+                    {
+                        return $query->where('look', '>=', $look);
+                    }
+                    else
+                    {
+                        return $query->where('look', '<=', $look);
+                    }
+                })
+                ->when(true, function($query) use($all, $all_limit){
+                    if($all_limit==='1')
+                    {
+                        return $query->where('all', '>=', $all);
+                    }
+                    else
+                    {
+                        return $query->where('all', '<=', $all);
+                    }
+                })
+                ->when(true, function($query) use($atmosphere, $atmosphere_limit){
+                    if($atmosphere_limit==='1')
+                    {
+                        return $query->where('atmosphere', '>=', $atmosphere);
+                    }
+                    else
+                    {
+                        return $query->where('atmosphere', '<=', $atmosphere);
+                    }
+                })
+                ->when(true, function($query) use($speed, $speed_limit){
+                    if($speed_limit==='1')
+                    {
+                        return $query->where('speed', '>=', $speed);
+                    }
+                    else
+                    {
+                        return $query->where('speed', '<=', $speed);
+                    }
+                })
+                ->when(true, function($query) use($hospitality, $hospitality_limit){
+                    if($hospitality_limit==='1')
+                    {
+                        return $query->where('hospitality', '>=', $hospitality);
+                    }
+                    else
+                    {
+                        return $query->where('hospitality', '<=', $hospitality);
+                    }
+                })
+                ->when(true, function($query) use($access, $access_limit){
+                    if($access_limit==='1')
+                    {
+                        return $query->where('access', '>=', $access);
+                    }
+                    else
+                    {
+                        return $query->where('access', '<=', $access);
+                    }
                 })
                 ->whereNull('posts.deleted_at')
                 ->orderBy('created_at', 'DESC')
