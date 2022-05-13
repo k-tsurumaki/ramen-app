@@ -221,4 +221,16 @@ class Post extends Model
                 ->orderBy('created_at', 'DESC')
                 ->paginate($limit_count);
     }
+
+    public function getPaginateLikedPosts($user_id, $limit_count)
+    {
+        return $this
+            ->select('posts.*')
+            ->whereHas('likes', function($query) use($user_id){
+                $query->where('user_id', '=', $user_id);
+            })
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
+    }
 }

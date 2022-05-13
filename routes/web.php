@@ -29,6 +29,7 @@ Route::get('/shop/{id}', [HomeController::class, 'shop'])->name('shop');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/like/{post}', [LikeController::class, 'like'])->name('like');
 Route::get('/unlike/{post}', [LikeController::class, 'unlike'])->name('unlike');
+Route::get('/liked_posts', [HomeController::class, 'liked_posts'])->name('liked_posts');
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/update', [HomeController::class, 'update'])->name('update');

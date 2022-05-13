@@ -24,7 +24,7 @@
             <h5>ラーメンについて</h5>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">味の濃さ</p>
+                    <p class="form-control-plaintext">味の濃さ　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="intensity" aria-label="Default select example">
@@ -42,7 +42,7 @@
             </div>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">麺の太さ</p>
+                    <p class="form-control-plaintext">麺の太さ　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="thickness" aria-label="Default select example">
@@ -60,7 +60,7 @@
             </div>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">値段</p>
+                    <p class="form-control-plaintext">値段　　　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="price_value" aria-label="Default select example">
@@ -78,7 +78,7 @@
             </div>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">見た目</p>
+                    <p class="form-control-plaintext">見た目　　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="look" aria-label="Default select example">
@@ -96,7 +96,7 @@
             </div>
             <div class="mb-4 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">総合評価</p>
+                    <p class="form-control-plaintext">総合評価　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="all" aria-label="Default select example">
@@ -115,7 +115,7 @@
             <h5>店について</h5>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">雰囲気</p>
+                    <p class="form-control-plaintext">雰囲気　　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="atmosphere" aria-label="Default select example">
@@ -151,7 +151,7 @@
             </div>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">接客</p>
+                    <p class="form-control-plaintext">接客　　　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="hospitality" aria-label="Default select example">
@@ -169,7 +169,7 @@
             </div>
             <div class="mb-2 row">
                 <div class="col-auto">
-                    <p class="form-control-plaintext">アクセス</p>
+                    <p class="form-control-plaintext">アクセス　　</p>
                 </div>
                 <div class="col-auto">
                     <select class="form-select mb-2" name="access" aria-label="Default select example">

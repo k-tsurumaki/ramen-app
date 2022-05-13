@@ -258,4 +258,9 @@ class HomeController extends Controller
     {
         return view('edit_profile');
     }
+
+    public function liked_posts(Post $post)
+    {
+        return view('liked_posts')->with(['liked_posts' => $post->getPaginateLikedPosts( \Auth::id(), 6)]);
+    }
 }
