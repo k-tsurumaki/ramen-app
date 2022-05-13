@@ -28,6 +28,10 @@ img {
     object-fit: cover;
 }
 
+.like{
+    padding-left: 32px;
+}
+
 footer.footer{
     background-color: #343a40;
     color: #fff;

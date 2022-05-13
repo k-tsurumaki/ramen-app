@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,8 @@ Route::get('/others/{id}', [HomeController::class, 'others'])->name('others');
 Route::get('/edit_profile', [HomeController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/shop/{id}', [HomeController::class, 'shop'])->name('shop');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
-Route::get('/search_by_user_id', [HomeController::class, 'search_by_user_id'])->name('search_by_user_id');
+Route::get('/like/{post}', [LikeController::class, 'like'])->name('like');
+Route::get('/unlike/{post}', [LikeController::class, 'unlike'])->name('unlike');
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/update', [HomeController::class, 'update'])->name('update');

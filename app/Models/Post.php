@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Shop;
 use App\Models\Menu;
+use App\Models\Like;
 use Illuminate\Pagination\Paginator;
 use phpDocumentor\Reflection\PseudoTypes\False_;
 
@@ -28,6 +29,11 @@ class Post extends Model
     public function menu()
     {
         return $this->belongsTo(Menu::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
     public function getPaginate(int $limit_count = 6)

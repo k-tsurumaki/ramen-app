@@ -24,6 +24,30 @@
                         @endif
                             <p class="card-text elipsis">{{ $post['content'] }}</p>
                             <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
+                            <span class="text-right">
+                            <i class="fa-solid fa-heart like"></i>
+                            
+                            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+                            @if($post->likes()->where('user_id', Auth::id())->exists())
+                            <!-- 「いいね」取消用ボタンを表示 -->
+                                <a href="{{ route('unlike', $post) }}" class="btn btn-success btn-sm">
+                                    いいね
+                                    <!-- 「いいね」の数を表示 -->
+                                    <span class="badge">
+                                        {{ $post->likes->count() }}
+                                    </span>
+                                </a>
+                            @else
+                            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                                <a href="{{ route('like', $post) }}" class="btn btn-secondary btn-sm">
+                                    いいね
+                                    <!-- 「いいね」の数を表示 -->
+                                    <span class="badge">
+                                        {{ $post->likes->count() }}
+                                    </span>
+                                </a>
+                            @endif
+                            </span>
                         </div>
                     </div>
                 @endforeach
