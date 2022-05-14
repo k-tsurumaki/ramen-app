@@ -13,6 +13,12 @@
         </div>
     @if($user->id == Auth::id())
         <div class="text-center"><a href="{{ route('liked_posts') }}" class="btn btn-primary">いいねした投稿を見る</a></div>
+    @elseif($user->followers()->where('following_user_id', Auth::id())->exists())
+    <!-- フォロー取消用ボタンを表示 -->
+        <div class="text-center"><a href="{{ route('unfollowing', $user) }}" class="btn btn-dark">フォローをはずす</a></div>
+    @else
+    <!-- まだユーザーがフォローをしていなければ、「いいね」ボタンを表示 -->
+        <div class="text-center"><a href="{{ route('following', $user) }}" class="btn btn-primary">フォローする</a></div>
     @endif
     </div>
 </div>

@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Post;
-use App\Models\Shop;
-use App\Models\Menu;
 use App\Models\Like;
-use DB;
 
 class LikeController extends Controller
 {
     public function like(Post $post, Request $request)
     {
+        dd($post);
         $like=New Like();
         $like->post_id=$post->id;
         $like->user_id=\Auth::user()->id;
