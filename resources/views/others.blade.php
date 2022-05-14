@@ -19,29 +19,19 @@
                             <a href="/shop/{{ $post['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $post->shop->name }}</h5></a>
                             <p class="card-text elipsis">{{ $post['content'] }}</p>
                             <a href="/detail_post/{{ $post['id'] }}" class="btn btn-primary">詳細を見る</a>
-                            <span class="text-right">
-                            <i class="fa-solid fa-heart like"></i>
-                            
-                            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
-                            @if($post->likes()->where('user_id', Auth::id())->exists())
-                            <!-- 「いいね」取消用ボタンを表示 -->
-                                <a href="{{ route('unlike', $post) }}" class="btn btn-success btn-sm">
-                                    いいね
+                            <span>
+                                <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+                                @if($post->likes()->where('user_id', Auth::id())->exists())
+                                <!-- 「いいね」取消用ボタンを表示 -->
+                                    <a href="{{ route('unlike', $post) }}"><i class="fa-solid fa-heart liked"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $post->likes->count() }}
-                                    </span>
-                                </a>
-                            @else
-                            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-                                <a href="{{ route('like', $post) }}" class="btn btn-secondary btn-sm">
-                                    いいね
+                                    {{ $post->likes->count() }}
+                                @else
+                                <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                                    <a href="{{ route('like', $post) }}"><i class="fa-solid fa-heart like"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $post->likes->count() }}
-                                    </span>
-                                </a>
-                            @endif
+                                    {{ $post->likes->count() }}
+                                @endif
                             </span>
                         </div>
                     </div>

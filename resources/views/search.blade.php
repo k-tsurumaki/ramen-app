@@ -20,29 +20,19 @@
                             <a href="/others/{{$search_result['user_id']}}" class="card-text">{{ $search_result->user->name }}</a>
                             <p class="card-text elipsis">{{ $search_result['content'] }}</p>
                             <a href="/detail_post/{{ $search_result['id'] }}" class="btn btn-primary">詳細を見る</a>
-                            <span class="text-right">
-                            <i class="fa-solid fa-heart like"></i>
-                            
-                            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
-                            @if($search_result->likes()->where('user_id', Auth::id())->exists())
-                            <!-- 「いいね」取消用ボタンを表示 -->
-                                <a href="{{ route('unlike', $search_result) }}" class="btn btn-success btn-sm">
-                                    いいね
+                            <span>
+                                <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+                                @if($search_result->likes()->where('user_id', Auth::id())->exists())
+                                <!-- 「いいね」取消用ボタンを表示 -->
+                                    <a href="{{ route('unlike', $search_result) }}"><i class="fa-solid fa-heart liked"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $search_result->likes->count() }}
-                                    </span>
-                                </a>
-                            @else
-                            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-                                <a href="{{ route('like', $search_result) }}" class="btn btn-secondary btn-sm">
-                                    いいね
+                                    {{ $search_result->likes->count() }}
+                                @else
+                                <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                                    <a href="{{ route('like', $search_result) }}"><i class="fa-solid fa-heart like"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $search_result->likes->count() }}
-                                    </span>
-                                </a>
-                            @endif
+                                    {{ $search_result->likes->count() }}
+                                @endif
                             </span>
                         </div>
                     </div>
