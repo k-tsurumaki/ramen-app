@@ -33,8 +33,7 @@ class CreatePostsTable extends Migration
 
             // 論理削除
             $table->softDeletes();
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
             
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
