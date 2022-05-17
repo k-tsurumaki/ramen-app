@@ -8,7 +8,7 @@
     <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
-                過去の投稿
+                過去の投稿({{ $posts->total() }})
                 <a href="{{ route('create') }}"><i class="fas fa-plus"></i></a>
             </div>
             <div class="card-body my-card-body">

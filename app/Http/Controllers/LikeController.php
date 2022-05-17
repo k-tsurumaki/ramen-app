@@ -10,7 +10,6 @@ class LikeController extends Controller
 {
     public function like(Post $post, Request $request)
     {
-        dd($post);
         $like=New Like();
         $like->post_id=$post->id;
         $like->user_id=\Auth::user()->id;

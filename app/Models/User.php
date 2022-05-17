@@ -62,4 +62,22 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followings', 'user_id', 'following_user_id');
     }
+
+    public function getPaginateFollows(int $limit_count = 6, int $user_id)
+    {
+        // フォローリストをペジネーション
+        return $this
+            ->find($user_id)
+            ->follows()
+            ->paginate($limit_count);
+    }
+
+    public function getPaginateFollowers(int $limit_count = 6, int $user_id)
+    {
+        // フォローリストをペジネーション
+        return $this
+            ->find($user_id)
+            ->followers()
+            ->paginate($limit_count);
+    }
 }

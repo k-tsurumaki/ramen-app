@@ -8,7 +8,7 @@
     <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
-                いいねした投稿
+                いいねした投稿({{ $liked_posts->total() }})
             </div>
             <div class="card-body my-card-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -44,9 +44,9 @@
             </div>
         </div>
     </div>
-@if(isset($search_user_result))
+@if(true)
     <div class="col-md-3">
-        @include('includes.profile', ['user' => $search_user_result])
+        @include('includes.profile', ['user' => Auth::user()])
     </div>
 @endif
 </div>
