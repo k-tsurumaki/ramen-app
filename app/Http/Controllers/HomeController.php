@@ -85,8 +85,11 @@ class HomeController extends Controller
         ]);
         $image = $request->file('image');
 
-        $path = \Storage::put('/public', $image);
-        $path = explode('/', $path);
+        // $path = \Storage::put('/public', $image);
+        // $path = explode('/', $path);
+
+        //バケットに「test」フォルダを作っているとき
+        $path = Storage::disk('s3')->put('/test',$image, 'public');
 
         DB::transaction(function() use($posts, $path) {
             // 存在確認
@@ -124,7 +127,7 @@ class HomeController extends Controller
                 'shop_id'=>$shop_id,
                 'menu_id'=>$menu_id,
                 'content'=>$posts['content'],
-                'image'=>$path[1], 
+                'image'=>$path, 
                 'price'=>(int)$posts['price'],
                 'thickness'=>(int)$posts['thickness'],
                 'intensity'=>(int)$posts['intensity'], 
