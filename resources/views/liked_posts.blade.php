@@ -8,7 +8,7 @@
     <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
-                いいねした投稿
+                いいねした投稿({{ $liked_posts->total() }})
             </div>
             <div class="card-body my-card-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -20,29 +20,19 @@
                             <a href="/others/{{$liked_post['user_id']}}" class="card-text">{{ $liked_post->user->name }}</a>
                             <p class="card-text elipsis">{{ $liked_post['content'] }}</p>
                             <a href="/detail_post/{{ $liked_post['id'] }}" class="btn btn-primary">詳細を見る</a>
-                            <span class="text-right">
-                            <i class="fa-solid fa-heart like"></i>
-                            
-                            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
-                            @if($liked_post->likes()->where('user_id', Auth::id())->exists())
-                            <!-- 「いいね」取消用ボタンを表示 -->
-                                <a href="{{ route('unlike', $liked_post) }}" class="btn btn-success btn-sm">
-                                    いいね
+                            <span>
+                                <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+                                @if($liked_post->likes()->where('user_id', Auth::id())->exists())
+                                <!-- 「いいね」取消用ボタンを表示 -->
+                                    <a href="{{ route('unlike', $liked_post) }}"><i class="fa-solid fa-heart liked"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $liked_post->likes->count() }}
-                                    </span>
-                                </a>
-                            @else
-                            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-                                <a href="{{ route('like', $liked_post) }}" class="btn btn-secondary btn-sm">
-                                    いいね
+                                    {{ $liked_post->likes->count() }}
+                                @else
+                                <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                                    <a href="{{ route('like', $liked_post) }}"><i class="fa-solid fa-heart like"></i></a>
                                     <!-- 「いいね」の数を表示 -->
-                                    <span class="badge">
-                                        {{ $liked_post->likes->count() }}
-                                    </span>
-                                </a>
-                            @endif
+                                    {{ $liked_post->likes->count() }}
+                                @endif
                             </span>
                         </div>
                     </div>
@@ -54,9 +44,9 @@
             </div>
         </div>
     </div>
-@if(isset($search_user_result))
+@if(true)
     <div class="col-md-3">
-        @include('includes.profile', ['user' => $search_user_result])
+        @include('includes.profile', ['user' => Auth::user()])
     </div>
 @endif
 </div>

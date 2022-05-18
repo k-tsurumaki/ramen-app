@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\FollowingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/like/{post}', [LikeController::class, 'like'])->name('like');
 Route::get('/unlike/{post}', [LikeController::class, 'unlike'])->name('unlike');
 Route::get('/liked_posts', [HomeController::class, 'liked_posts'])->name('liked_posts');
+Route::get('/following/{user}', [FollowingController::class, 'following'])->name('following');
+Route::get('/unfollowing/{user}', [FollowingController::class, 'unfollowing'])->name('unfollowing');
+Route::get('/following_list/{user}', [FollowingController::class, 'following_list'])->name('following_list');
+Route::get('/follower_list/{user}', [FollowingController::class, 'follower_list'])->name('follower_list');
+
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/update', [HomeController::class, 'update'])->name('update');
