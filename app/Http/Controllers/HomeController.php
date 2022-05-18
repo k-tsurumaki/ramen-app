@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Shop;
 use App\Models\Menu;
+use Storage;
 use DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 use Illuminate\Pagination\Paginator;
@@ -89,7 +90,7 @@ class HomeController extends Controller
         // $path = explode('/', $path);
 
         //バケットに「test」フォルダを作っているとき
-        $path = Storage::disk('s3')->put('/test',$image, 'public');
+        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
         DB::transaction(function() use($posts, $path) {
             // 存在確認
@@ -127,7 +128,7 @@ class HomeController extends Controller
                 'shop_id'=>$shop_id,
                 'menu_id'=>$menu_id,
                 'content'=>$posts['content'],
-                'image'=>$path, 
+                'image'=>Storage::disk('s3')->url($path), 
                 'price'=>(int)$posts['price'],
                 'thickness'=>(int)$posts['thickness'],
                 'intensity'=>(int)$posts['intensity'], 
