@@ -6,6 +6,7 @@
         <div class="text-center">
             <h3>{{ $shop->name }}</h3>
             <br>
+            <img src="{{ $shop['image'] }}" alt="お店の画像は登録されていません" class="img-thumbnail icon">
         </div>
     </div>
 </div>
