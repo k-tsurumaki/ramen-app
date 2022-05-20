@@ -14,7 +14,7 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($liked_posts as $liked_post)
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ '/storage/'.$liked_post['image'] }}" class="card-img-top img" alt="ラーメン画像">
+                        <img src="{{ $liked_post['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
                             <a href="/shop/{{ $liked_post['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $liked_post->shop->name }}</h5></a>
                             <a href="/others/{{$liked_post['user_id']}}" class="card-text">{{ $liked_post->user->name }}</a>
