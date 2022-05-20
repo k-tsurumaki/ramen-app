@@ -3,12 +3,12 @@
         検索
     </div>
     <div class="card-body my-card-body">
-        <form class="mb-2 mt-4" method="POST" action="{{ route('search') }}">
+        <form class="mb-2 mt-4" method="POST" action="{{ route('search_in_shop_page') }}">
             @csrf
-            <input type="hidden" name="search_user_id" value="{{ $shop_id }}"/>
+            <input type="hidden" name="search_shop_id" value="{{ $shop['id'] }}"/>
             <h5>メニュー検索</h5>
             <div class="d-flex justify-content-center mb-3">
-                <input type="search" class="form-control" name="search_shop" placeholder="メニュー名を入力" value="@if (isset($search_shop)) {{ $search_shop }} @endif">
+                <input type="search" class="form-control" name="search_menu" placeholder="メニュー名を入力" value="@if (isset($search_menu)) {{ $search_menu }} @endif">
             </div>
             <h5>投稿文検索</h5>
             <div class="d-flex justify-content-center mb-3">

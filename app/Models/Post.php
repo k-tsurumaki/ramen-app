@@ -220,6 +220,35 @@ class Post extends Model
                 ->paginate($limit_count);
     }
 
+    public function getPaginateSearchInShopPageResults($request, $limit_count)
+    {
+        // 検索フォームで入力された値を取得する
+        $search_shop_id = $request->input('search_shop_id');   // お店のid
+        $search_menu = $request->input('search_menu');   // メニュー
+        $search_content = $request->input('search_content');   // キーワード
+
+        // dd($search_shop_id);
+
+        return $this
+                ->select('posts.*')
+                ->when(isset($search_shop_id), function($query) use ($search_shop_id){
+                    $query->whereHas('shop', function($query) use($search_shop_id){
+                        $query->where('id', '=', $search_shop_id);
+                    });
+                })
+                ->when(isset($search_menu), function($query) use ($search_menu){
+                    $query->whereHas('menu', function($query) use($search_menu){
+                        $query->where('name', 'LIKE', "%$search_menu%");
+                    });
+                })
+                ->when(isset($search_content), function($query) use($search_content){
+                    return $query->where('content', 'LIKE', "%$search_content%");
+                })
+                ->whereNull('posts.deleted_at')
+                ->orderBy('created_at', 'DESC')
+                ->paginate($limit_count);
+    }
+
     public function getPaginateLikedPosts($user_id, $limit_count)
     {
         return $this

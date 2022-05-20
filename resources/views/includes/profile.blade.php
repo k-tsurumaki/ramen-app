@@ -9,7 +9,7 @@
         <div class="text-center mb-3">
             <h3>{{ $user->name }}</h3>
             <br>
-            <img src="{{ '/storage/'.$user['image'] }}" alt="ユーザーアイコン" class="img-thumbnail icon">
+            <img src="{{ $user['image'] }}" alt="アイコンは設定されていません" class="img-thumbnail icon">
         </div>
         <div class="mb-5 row text-center">
             <div class="dropdown col-sm-6">

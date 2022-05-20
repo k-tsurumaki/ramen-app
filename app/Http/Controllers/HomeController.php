@@ -227,13 +227,16 @@ class HomeController extends Controller
 
         $image = $request->file('image');
 
-        $path = \Storage::put('/public', $image);
-        $path = explode('/', $path);
+        // $path = \Storage::put('/public', $image);
+        // $path = explode('/', $path);
+
+        //バケットに「test」フォルダを作っているとき
+        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
         DB::transaction(function() use($user, $path){
             User::where('id', \Auth::id())->update([
                 'name'=>$user['name'],
-                'image'=>$path[1]
+                'image'=>Storage::disk('s3')->url($path),
             ]);
         });
         return redirect(route('home'));
@@ -256,6 +259,11 @@ class HomeController extends Controller
     public function search(Post $post, Request $request) // 検索
     {
         return view('search')->with(['search_results' => $post->getPaginateSearchResults($request, 6)]);
+    }
+
+    public function search_in_shop_page(Post $post, Request $request) // お店のページでの検索
+    {
+        return view('search')->with(['search_results' => $post->getPaginateSearchInShopPageResults($request, 6)]);
     }
 
     public function edit_profile()
