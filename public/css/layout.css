@@ -29,11 +29,20 @@ img {
 }
 
 .like{
-    padding-left: 32px;
+    padding-left: 100px;
+}
+
+.liked{
+    padding-left: 100px;
+    color: red;
 }
 
 footer.footer{
     background-color: #343a40;
     color: #fff;
     text-align: center;
+}
+
+.button{
+    width: 133.25px;
 }
