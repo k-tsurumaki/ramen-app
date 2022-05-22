@@ -17,7 +17,7 @@
     <form class="card-body" action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="post_id" value="{{  $detail['edit_post']['id'] }}"/>
-        <img src="{{ '/storage/'. $detail['edit_post']['image'] }}" class='img-fluid mb-3 mx-auto d-block'/>
+        <img src="{{ $detail['edit_post']['image'] }}" class='img-fluid mb-3 mx-auto d-block'/>
         <div class="form-group mb-3" >
             <input type="text" class="form-control" name="shop" placeholder="店名" value="{{ $detail['shop_name'] }}"/>
         </div>
