@@ -46,3 +46,8 @@ footer.footer{
 .button{
     width: 133.25px;
 }
+
+.radio-plain {
+    top: 8px;
+    position: relative;
+  }
