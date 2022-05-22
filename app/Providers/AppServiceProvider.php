@@ -31,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
             $menu_kind_list = ['醤油', '塩', '豚骨', '味噌', '鶏白湯', '魚介', '煮干し','つけ麺', 'まぜそば・油そば', '家系', '二郎系', 'その他'];
             $view->with('menu_kind_list', $menu_kind_list);
         });
+
+        // \URL::forceScheme('https');
+        // $this->app['request']->server->set('HTTPS','on');
     }
 }
