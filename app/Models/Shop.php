@@ -32,4 +32,20 @@ class Shop extends Model
         $shop = $this->find($id);
         return $shop['name'];
     }
+
+    public function getShopId(int $user_id)
+    {
+        $shop = $this            
+            ->where('shops.user_id', '=', $user_id)
+            ->first();
+        return $shop->id;
+    }
+
+    public function IsShopExist(int $user_id)
+    {
+        $shop = $this            
+            ->where('shops.user_id', '=', $user_id)
+            ->first();
+        return $shop->id;
+    }
 }

@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
+
     public function follows()
     {
         return $this->belongsToMany(User::class, 'followings', 'following_user_id', 'user_id');

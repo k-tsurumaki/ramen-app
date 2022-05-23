@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Shop;
+use App\Models\Menu;
 
 class LoginController extends Controller
 {
@@ -36,5 +42,19 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectPath()
+    {
+        if(Auth::user()->is_owner===1)
+        {
+            $shop = new Shop();
+            $shop_id = $shop->getShopId(Auth::user()->id);
+            return 'shop/'.$shop_id;
+        }
+        else
+        {
+            return 'timeline';
+        }
     }
 }

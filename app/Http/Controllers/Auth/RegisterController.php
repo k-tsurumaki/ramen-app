@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,6 +83,18 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'is_owner' => null
             ]);
+        }
+    }
+
+    public function redirectPath()
+    {
+        if(Auth::user()->is_owner===1)
+        {
+            return 'register_shop_profile';
+        }
+        else
+        {
+            return 'timeline';
         }
     }
 }
