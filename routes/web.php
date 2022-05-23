@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowingController;
@@ -16,9 +17,18 @@ use App\Http\Controllers\FollowingController;
 |
 */
 
+Route::get('/', function(){
+    return view('welcome');
+});
+
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+
+// Route::get('/redirect', [LoginController::class, 'redirect'])->name('redirect');
+// Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
+// Route::get('/', [HomeController::class, 'index'])->name('index');
+// Route::get('/', [LoginController::class, 'redirect'])->name('redirect');
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/timeline', [HomeController::class, 'timeline'])->name('timeline');
 Route::get('/create', [HomeController::class, 'create'])->name('create');

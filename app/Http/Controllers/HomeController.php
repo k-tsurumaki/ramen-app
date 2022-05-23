@@ -29,6 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index(Post $post)
     {                
         return view('home')->with(['posts' => $post->getPaginateUserPosts(6, \Auth::id())]);
