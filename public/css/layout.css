@@ -50,4 +50,8 @@ footer.footer{
 .radio-plain {
     top: 8px;
     position: relative;
-  }
+}
+
+.date{
+    position: relative;
+}
