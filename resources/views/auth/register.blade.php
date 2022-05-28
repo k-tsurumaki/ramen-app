@@ -61,6 +61,18 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_owner" id="is_owner" {{ old('is_owner') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="is_owner">
+                                        {{ __('Is Owner') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

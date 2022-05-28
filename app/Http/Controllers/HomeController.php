@@ -11,6 +11,7 @@ use Storage;
 use DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index(Post $post)
     {                
         return view('home')->with(['posts' => $post->getPaginateUserPosts(6, \Auth::id())]);
@@ -52,6 +54,11 @@ class HomeController extends Controller
     public function create(Menu $menu)
     {
         return view('create')->with(['menu_kind_list' => $menu->getKindList()]);
+    }
+
+    public function register_shop_profile()
+    {
+        return view('register_shop_profile');
     }
     
     public function detail_post(Post $post, Shop $shop, Menu $menu, $id)
@@ -140,6 +147,48 @@ class HomeController extends Controller
                 'hospitality'=>(int)$posts['hospitality'],
                 'access'=>(int)$posts['access']
             ]);
+        });
+
+        return redirect(route('home'));
+    }
+
+    public function store_shop(Request $request)
+    {
+        $posts = $request->all();
+        $request->validate([
+            'image'=>'required',
+            'shop'=>'required',
+            'address'=>'required',
+        ]);
+        $image = $request->file('image');
+
+        // $path = \Storage::put('/public', $image);
+        // $path = explode('/', $path);
+
+        //バケットに「test」フォルダを作っているとき
+        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+
+        DB::transaction(function() use($posts, $path) {
+            // 存在確認
+            $shop_name_exist=Shop::where('name', '=', $posts['shop'])->whereNull('user_id')->exists();
+            $shop_address_exist=Shop::where('address', '=', $posts['address'])->whereNull('user_id')->exists();
+
+            if($shop_name_exist && $shop_address_exist){
+                Shop::where('name', '=', $posts['shop'])->where('address', '=', $posts['address'])->update([
+                    'image'=>Storage::disk('s3')->url($path),
+                    'user_id'=>\Auth::id()
+                ]);
+            }
+            elseif($shop_name_exist && !($shop_address_exist)){
+                Shop::where('name', '=', $posts['shop'])->update([
+                    'address'=>$posts['address'],
+                    'image'=>Storage::disk('s3')->url($path),
+                    'user_id'=>\Auth::id()
+                ]);
+            }
+            else{
+                Shop::insert(['name'=>$posts['shop'], 'address'=>$posts['address'], 'image'=>Storage::disk('s3')->url($path), 'user_id'=>\Auth::id()]);
+            }
         });
 
         return redirect(route('home'));
@@ -242,6 +291,36 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
+    public function update_shop_profile(Request $request)
+    {
+        $shop = $request->all();
+        // dd($shop['id']);
+
+        $request->validate([
+            'shop'=>'required',
+            'image'=>'required',
+            'address'=>'required',
+        ]);
+
+        $image = $request->file('image');
+
+        // $path = \Storage::put('/public', $image);
+        // $path = explode('/', $path);
+
+        //バケットに「test」フォルダを作っているとき
+        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+
+        DB::transaction(function() use($shop, $path){
+            Shop::where('id', $shop['id'])->update([
+                'name'=>$shop['shop'],
+                'image'=>Storage::disk('s3')->url($path),
+                'address'=>$shop['address'],
+                'station'=>$shop['station']
+            ]);
+        });
+        return redirect('shop/'.$shop['id']);
+    }
+
 
     public function destroy(Request $request)
     {
@@ -269,6 +348,11 @@ class HomeController extends Controller
     public function edit_profile()
     {
         return view('edit_profile');
+    }
+
+    public function edit_shop_profile($id)
+    {
+        return view('edit_shop_profile')->with(['shop' => Shop::find($id)]);
     }
 
     public function liked_posts(Post $post)
