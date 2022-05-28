@@ -37,7 +37,7 @@ Route::get('/detail_post/{id}', [HomeController::class, 'detail_post'])->name('d
 Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
 Route::get('/others/{id}', [HomeController::class, 'others'])->name('others');
 Route::get('/edit_profile', [HomeController::class, 'edit_profile'])->name('edit_profile');
-Route::get('/edit_shop_profile', [HomeController::class, 'edit_shop_profile'])->name('edit_shop_profile');
+Route::get('/edit_shop_profile/{id}', [HomeController::class, 'edit_shop_profile'])->name('edit_shop_profile');
 Route::get('/shop/{id}', [HomeController::class, 'shop'])->name('shop');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/search_in_shop_page', [HomeController::class, 'search_in_shop_page'])->name('search_in_shop_page');
@@ -54,6 +54,7 @@ Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::post('/store_shop', [HomeController::class, 'store_shop'])->name('store_shop');
 Route::post('/update', [HomeController::class, 'update'])->name('update');
 Route::post('/update_profile', [HomeController::class, 'update_profile'])->name('update_profile');
+Route::post('/update_shop_profile', [HomeController::class, 'update_shop_profile'])->name('update_shop_profile');
 Route::post('/destroy', [HomeController::class, 'destroy'])->name('destroy');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/search_in_shop_page', [HomeController::class, 'search_in_shop_page'])->name('search_in_shop_page');

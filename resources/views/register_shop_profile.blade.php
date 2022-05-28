@@ -23,6 +23,12 @@
         @error('address')
             <div class="alert alert-danger">住所を入力してください</div>
         @enderror
+        <div class="form-group mb-3" >
+            <input type="text" class="form-control" name="station" placeholder="最寄り駅" value = "{{ old('station') }}">
+        </div>
+        @error('station')
+            <div class="alert alert-danger">最寄り駅を入力してください</div>
+        @enderror
 
         <button type="submit" class="btn btn-primary">作成</button>
     </form>

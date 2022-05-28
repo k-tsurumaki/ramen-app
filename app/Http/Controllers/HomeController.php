@@ -291,6 +291,36 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
+    public function update_shop_profile(Request $request)
+    {
+        $shop = $request->all();
+        // dd($shop['id']);
+
+        $request->validate([
+            'shop'=>'required',
+            'image'=>'required',
+            'address'=>'required',
+        ]);
+
+        $image = $request->file('image');
+
+        // $path = \Storage::put('/public', $image);
+        // $path = explode('/', $path);
+
+        //バケットに「test」フォルダを作っているとき
+        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+
+        DB::transaction(function() use($shop, $path){
+            Shop::where('id', $shop['id'])->update([
+                'name'=>$shop['shop'],
+                'image'=>Storage::disk('s3')->url($path),
+                'address'=>$shop['address'],
+                'station'=>$shop['station']
+            ]);
+        });
+        return redirect('shop/'.$shop['id']);
+    }
+
 
     public function destroy(Request $request)
     {
@@ -320,10 +350,9 @@ class HomeController extends Controller
         return view('edit_profile');
     }
 
-    public function edit_shop_profile()
+    public function edit_shop_profile($id)
     {
-        dd('edit');
-        return view('edit_shop_profile');
+        return view('edit_shop_profile')->with(['shop' => Shop::find($id)]);
     }
 
     public function liked_posts(Post $post)
