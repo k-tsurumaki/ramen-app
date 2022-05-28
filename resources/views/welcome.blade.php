@@ -40,7 +40,7 @@
                 <div id="map" style="height:500px; width:500px">
                 </div>
                 <script src="{{ asset('/js/result.js') }}"></script>
-                <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBOlWmf9T4nkr3paI1dXwXMHPHqqgk4wPk&callback=initMap" async defer>
+                <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key={{ env('GOOGLE_API_KEY') }}&callback=initMap" async defer>
                 </script>
             </div>
         </div>
