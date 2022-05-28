@@ -19,8 +19,11 @@
                 <div class="text-left"><a href="{{ route('follower_list', $user) }}" class="btn btn-secondary button">フォロワー　{{ $user->followers->count() }}</a></div>
             </div>            
         </div>
+    @if($user->id == Auth::id() && $user->is_owner===1)
+        <div class="text-center mb-3"><a href="/shop/{{ $user->shop->id }}"  class="btn btn-primary">お店のページ</a></div>
+    @endif
     @if($user->id == Auth::id())
-        <div class="text-center"><a href="{{ route('liked_posts') }}" class="btn btn-primary">いいねした投稿を見る</a></div>
+        <div class="text-center mb-3"><a href="{{ route('liked_posts') }}" class="btn btn-primary">いいねした投稿を見る</a></div>
     @elseif($user->followers()->where('following_user_id', Auth::id())->exists())
     <!-- フォロー取消用ボタンを表示 -->
         <div class="text-center"><a href="{{ route('unfollowing', $user) }}" class="btn btn-dark">フォローをはずす</a></div>

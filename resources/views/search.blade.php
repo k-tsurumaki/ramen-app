@@ -13,11 +13,18 @@
             <div class="card-body my-card-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($search_results as $search_result)
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18.7rem;">
                         <img src="{{ $search_result['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
                             <a href="/shop/{{ $search_result['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $search_result->shop->name }}</h5></a>
-                            <a href="/others/{{$search_result['user_id']}}" class="card-text">{{ $search_result->user->name }}</a>
+                            <div class="row">
+                            @if($search_result['user_id']==Auth::user()->id)
+                                <a href="/home" class="card-text col">{{ $search_result->user->name }}</a>
+                            @else
+                                <a href="/others/{{$search_result['user_id']}}" class="card-text col">{{ $search_result->user->name }}</a>
+                            @endif
+                                <h6 class="col-7 mt-1">{{ $search_result->created_at->format('Y年m月d日') }}</h6>
+                            </div>
                             <p class="card-text elipsis">{{ $search_result['content'] }}</p>
                             <a href="/detail_post/{{ $search_result['id'] }}" class="btn btn-primary">詳細を見る</a>
                             <span>
