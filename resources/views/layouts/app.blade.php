@@ -60,6 +60,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('timeline') }}">タイムライン</a>
                             </li>
+                        @if (Auth::user()->is_owner)
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shop/{{ Auth::user()->shop->id }}">お店のページ</a>
+                            </li>
+                        @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('create') }}">新規投稿</a>
                             </li>
