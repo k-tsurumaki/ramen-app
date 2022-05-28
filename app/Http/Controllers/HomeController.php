@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Shop;
 use App\Models\Menu;
 use Storage;
+use Carbon\Carbon;
 use DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 use Illuminate\Pagination\Paginator;
@@ -145,7 +146,9 @@ class HomeController extends Controller
                 'atmosphere'=>(int)$posts['atmosphere'],
                 'speed'=>(int)$posts['speed'],
                 'hospitality'=>(int)$posts['hospitality'],
-                'access'=>(int)$posts['access']
+                'access'=>(int)$posts['access'],
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now(),
             ]);
         });
 
