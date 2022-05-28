@@ -106,7 +106,7 @@ class HomeController extends Controller
 
             // shop_idを取得
             if(!$shop_exist){
-                $shop_id = Shop::insertGetId(['name'=>$posts['shop']]);
+                $shop_id = Shop::insertGetId(['name'=>$posts['shop'], 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
             }else{
                 $shop = Shop::select('shops.*')
                     ->where('name', '=', $posts['shop'])
@@ -121,7 +121,7 @@ class HomeController extends Controller
 
             // menu_idを取得
             if(!$menu_exist){
-                $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind]);
+                $menu_id = Menu::insertGetId(['shop_id'=>$shop_id, 'name'=>$posts['menu'], 'kind'=>$kind, 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now(),]);
             }else{
                 $menu = Menu::select('menus.*')
                     ->where('name', '=', $posts['menu'])
@@ -190,7 +190,12 @@ class HomeController extends Controller
                 ]);
             }
             else{
-                Shop::insert(['name'=>$posts['shop'], 'address'=>$posts['address'], 'image'=>Storage::disk('s3')->url($path), 'user_id'=>\Auth::id()]);
+                Shop::insert(['name'=>$posts['shop'], 
+                            'address'=>$posts['address'],
+                            'image'=>Storage::disk('s3')->url($path),
+                            'user_id'=>\Auth::id(),
+                            'created_at'=>Carbon::now(),
+                            'updated_at'=>Carbon::now(),]);
             }
         });
 
