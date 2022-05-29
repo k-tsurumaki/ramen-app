@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('menu_kind_list', $menu_kind_list);
         });
 
-        \URL::forceScheme('https');
-        $this->app['request']->server->set('HTTPS','on');
+        // \URL::forceScheme('https');
+        // $this->app['request']->server->set('HTTPS','on');
     }
 }
