@@ -37,7 +37,7 @@
                     <div id="mapArea" style="width:410px; height:350px; border: 1px solid"></div>
                     </div>
 
-                    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}"></script>
+                    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ config('services.google.google_api_key') }}"></script>
 
                     <script type="text/javascript">
                         //地図の初期表示
