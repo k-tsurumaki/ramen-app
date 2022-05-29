@@ -30,7 +30,7 @@
             <div class="row mb-3">
                 <div style="text-align: center;" class="col-12">
                     <input type="text" id="addressInput2" value="{{ $shop['name']}}" style="width: 250px">
-                    <input type="button" value="場所を表示" onclick="getIdoKeidoMap();" class="mb-1">
+                    <input type="button" value="場所を表示" onclick="getIdoKeidoMap();" class="mb-1" disabled>
                     <br />
                     ※うまく表示されない場合は住所を入力してください
                     <br /><br />

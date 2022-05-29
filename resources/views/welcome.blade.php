@@ -37,11 +37,6 @@
             @endif
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div id="map" style="height:500px; width:500px">
-                </div>
-                <script src="{{ asset('/js/result.js') }}"></script>
-                <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key={{ config('services.google.google_api_key') }}&callback=initMap" async defer>
-                </script>
             </div>
         </div>
     </body>
