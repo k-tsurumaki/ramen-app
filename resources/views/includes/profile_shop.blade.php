@@ -29,23 +29,32 @@
             </div>
             <div class="row mb-3">
                 <div style="text-align: center;" class="col-12">
-                    <input type="text" id="addressInput2" value="{{ $shop['name']}}" style="width: 250px">
+                    <!-- <input type="text" id="addressInput2" value="{{ $shop['name']}}" style="width: 250px">
                     <input type="button" value="場所を表示" onclick="getIdoKeidoMap();" class="mb-1">
                     <br />
                     ※うまく表示されない場合は住所を入力してください
                     <br /><br />
                     <div id="mapArea" style="width:410px; height:350px; border: 1px solid"></div>
-                    </div>
+                    </div> -->
 
-                    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ config('services.google.google_api_key') }}"></script>
-
-                    <script type="text/javascript">
+                    <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ config('services.google.google_api_key') }}"></script> -->
+                    <i class="fa-solid fa-map-location-dot"></i>
+                @if(isset($shop->address))
+                    <iframe frameborder="0" style="width:410px; height:350px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->address }}"
+                        allowfullscreen>
+                    </iframe>
+                @else
+                    <iframe frameborder="0" style="width:410px; height:350px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->name }}"
+                        allowfullscreen>
+                    </iframe>
+                @endif
+                    <!-- <script type="text/javascript">
                         //地図の初期表示
-                        new google.maps.Map(document.getElementById("mapArea"), {
-                        zoom: 5,
-                        center: new google.maps.LatLng(36,138),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                        });
+                        // new google.maps.Map(document.getElementById("mapArea"), {
+                        // zoom: 5,
+                        // center: new google.maps.LatLng(36,138),
+                        // mapTypeId: google.maps.MapTypeId.ROADMAP
+                        // });
 
                     function getIdoKeidoMap() {
 
@@ -118,7 +127,7 @@
                             }
                         });
                     }
-                    </script>   
+                    </script>    -->
                 </div> 
             </div>
         </div>
