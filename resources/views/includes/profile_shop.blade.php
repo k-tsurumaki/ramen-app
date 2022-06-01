@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-header d-flex justify-content-between">
         お店情報
-    @if($shop->user_id == Auth::id())
+    @if( ($shop->user_id == Auth::id()) | (Auth::id() == 1))
         <a href="/edit_shop_profile/{{$shop->id}}"><i class="fa-solid fa-user-gear"></i></a>
     @endif
     </div>

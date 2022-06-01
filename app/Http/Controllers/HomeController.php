@@ -306,26 +306,31 @@ class HomeController extends Controller
 
         $request->validate([
             'shop'=>'required',
-            'image'=>'required',
             'address'=>'required',
         ]);
 
         $image = $request->file('image');
+        if(isset($image)){
+            $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
-        // $path = \Storage::put('/public', $image);
-        // $path = explode('/', $path);
-
-        //バケットに「test」フォルダを作っているとき
-        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
-
-        DB::transaction(function() use($shop, $path){
-            Shop::where('id', $shop['id'])->update([
-                'name'=>$shop['shop'],
-                'image'=>Storage::disk('s3')->url($path),
-                'address'=>$shop['address'],
-                'station'=>$shop['station']
-            ]);
-        });
+            DB::transaction(function() use($shop, $path){
+                Shop::where('id', $shop['id'])->update([
+                    'name'=>$shop['shop'],
+                    'image'=>Storage::disk('s3')->url($path),
+                    'address'=>$shop['address'],
+                    'station'=>$shop['station']
+                ]);
+            });
+        }
+        else{
+            DB::transaction(function() use($shop){
+                Shop::where('id', $shop['id'])->update([
+                    'name'=>$shop['shop'],
+                    'address'=>$shop['address'],
+                    'station'=>$shop['station']
+                ]);
+            });
+        }
         return redirect('shop/'.$shop['id']);
     }
 
@@ -351,6 +356,11 @@ class HomeController extends Controller
     public function search_in_shop_page(Post $post, Request $request) // お店のページでの検索
     {
         return view('search')->with(['search_results' => $post->getPaginateSearchInShopPageResults($request, 6)]);
+    }
+
+    public function like_ranking(Post $post, $id)
+    {
+        return view('search')->with(['search_results' => $post->getPaginateLikedRankingInShopPage($id, 6)]);
     }
 
     public function edit_profile()

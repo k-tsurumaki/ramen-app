@@ -48,6 +48,7 @@ Route::get('/following/{user}', [FollowingController::class, 'following'])->name
 Route::get('/unfollowing/{user}', [FollowingController::class, 'unfollowing'])->name('unfollowing');
 Route::get('/following_list/{user}', [FollowingController::class, 'following_list'])->name('following_list');
 Route::get('/follower_list/{user}', [FollowingController::class, 'follower_list'])->name('follower_list');
+Route::get('/like_ranking/{id}', [HomeController::class, 'like_ranking'])->name('like_ranking');
 
 
 Route::post('/store', [HomeController::class, 'store'])->name('store');
