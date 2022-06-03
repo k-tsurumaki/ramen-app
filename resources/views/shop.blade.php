@@ -9,6 +9,10 @@
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
                 過去の投稿({{ $posts->total() }})
+                <a href="/like_ranking/{{$shop->id}}">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    いいねランキング
+                </a>
             </div>
             <div class="card-body my-card-body">
                 <div class="row row-cols-1 row-cols-md-2 g-4">

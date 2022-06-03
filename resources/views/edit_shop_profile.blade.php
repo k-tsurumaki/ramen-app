@@ -27,10 +27,6 @@
 
                             <div class="col-md-6">
                                 <input class="mb-3" type="file" name="image" value = "{{ old('image') }}">
-
-                            @error('image')
-                                <div class="alert alert-danger">画像ファイルを選択してください</div>
-                            @enderror
                             </div>
                         </div>
 

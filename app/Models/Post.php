@@ -226,6 +226,17 @@ class Post extends Model
         $search_shop_id = $request->input('search_shop_id');   // お店のid
         $search_menu = $request->input('search_menu');   // メニュー
         $search_content = $request->input('search_content');   // キーワード
+        $search_kind = $request->input('search_kind');   // 種類
+        $intensity = $request->input('intensity');
+        $intensity_limit = $request->input('intensity_limit');
+        $thickness = $request->input('thickness');
+        $thickness_limit = $request->input('thickness_limit');
+        $price_value = $request->input('price_value');
+        $price_value_limit = $request->input('price_value_limit');
+        $look = $request->input('look');
+        $look_limit = $request->input('look_limit');
+        $all = $request->input('all');
+        $all_limit = $request->input('all_limit');
 
         // dd($search_shop_id);
 
@@ -244,6 +255,61 @@ class Post extends Model
                 ->when(isset($search_content), function($query) use($search_content){
                     return $query->where('content', 'LIKE', "%$search_content%");
                 })
+                ->when(($search_kind!=0), function($query) use ($search_kind){
+                    $query->whereHas('menu', function($query) use($search_kind){
+                        $query->where('kind', '=', Menu::getKind($search_kind-1));
+                    });
+                })
+                ->when(true, function($query) use($intensity, $intensity_limit){
+                    if($intensity_limit==='1')
+                    {
+                        return $query->where('intensity', '>=', $intensity);
+                    }
+                    else
+                    {
+                        return $query->where('intensity', '<=', $intensity);
+                    }
+                })
+                ->when(true, function($query) use($thickness, $thickness_limit){
+                    if($thickness_limit==='1')
+                    {
+                        return $query->where('thickness', '>=', $thickness);
+                    }
+                    else
+                    {
+                        return $query->where('thickness', '<=', $thickness);
+                    }
+                })
+                ->when(true, function($query) use($price_value, $price_value_limit){
+                    if($price_value_limit==='1')
+                    {
+                        return $query->where('price_value', '>=', $price_value);
+                    }
+                    else
+                    {
+                        return $query->where('price_value', '<=', $price_value);
+                    }
+                })
+                ->when(true, function($query) use($look, $look_limit){
+                    if($look_limit==='1')
+                    {
+                        return $query->where('look', '>=', $look);
+                    }
+                    else
+                    {
+                        return $query->where('look', '<=', $look);
+                    }
+                })
+                ->when(true, function($query) use($all, $all_limit){
+                    if($all_limit==='1')
+                    {
+                        return $query->where('all', '>=', $all);
+                    }
+                    else
+                    {
+                        return $query->where('all', '<=', $all);
+                    }
+                })
                 ->whereNull('posts.deleted_at')
                 ->orderBy('created_at', 'DESC')
                 ->paginate($limit_count);
@@ -258,6 +324,18 @@ class Post extends Model
             })
             ->whereNull('posts.deleted_at')
             ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
+    }
+
+    public function getPaginateLikedRankingInShopPage($shop_id, $limit_count)
+    {
+        return $this
+            ->select('posts.*')
+            ->where('shop_id', $shop_id)
+            ->withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->orderBy('created_at', 'DESC')
+            ->whereNull('posts.deleted_at')
             ->paginate($limit_count);
     }
 }
