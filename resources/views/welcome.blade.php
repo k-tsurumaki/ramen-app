@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="{{ asset('css/top.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -20,24 +21,23 @@
             }
         </style>
     </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    <body id="home" class="big-bg">
+        <div class="home-content wrapper">
+            <h2 class="page-title">おれの麺日記</h2>
+            <p>自分だけのラーメンコレクションを作ろう！</p>
             @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                <div>
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">ホーム</a>
+                        <a class="button" href="{{ url('/sideBar') }}">マイページ</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">ログイン</a>
+                        <a class="button" href="{{ route('login') }}">ログイン</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">新規登録</a>
+                            <a class="button" href="{{ route('register') }}">新規登録</a>
                         @endif
                     @endauth
                 </div>
             @endif
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            </div>
         </div>
     </body>
 </html>

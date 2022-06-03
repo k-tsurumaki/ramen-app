@@ -59,3 +59,8 @@ footer.footer{
 .map{
     text-align: center;
 }
+
+#top {
+    background-image: url(../images/top_image.jpg);
+    background-color: aqua;
+}
