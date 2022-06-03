@@ -28,7 +28,7 @@
             @if (Route::has('login'))
                 <div>
                     @auth
-                        <a class="button" href="{{ url('/sideBar') }}">マイページ</a>
+                        <a class="button" href="{{ url('/timeline') }}">マイページ</a>
                     @else
                         <a class="button" href="{{ route('login') }}">ログイン</a>
 
