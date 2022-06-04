@@ -32,11 +32,11 @@
                     <i class="fa-solid fa-map-location-dot"></i>
                     ※住所情報がない場合正確な場所でない可能性があります
                 @if(isset($shop->address))
-                    <iframe frameborder="0" style="width:410px; height:350px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->address }}"
+                    <iframe frameborder="0" class="map" style="width:280px; height:200px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->address }}"
                         allowfullscreen>
                     </iframe>
                 @else
-                    <iframe frameborder="0" style="width:410px; height:350px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->name }}"
+                    <iframe frameborder="0" class="map" style="width:280px; height:200px; border: 1px solid" src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.google_api_key') }}&q={{ $shop->name }}"
                         allowfullscreen>
                     </iframe>
                 @endif
