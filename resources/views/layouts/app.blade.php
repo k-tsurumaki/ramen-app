@@ -58,6 +58,9 @@
                                 <a class="nav-link" href="{{ route('home') }}">ホーム</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('friend_posts') }}">友達の投稿</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('timeline') }}">タイムライン</a>
                             </li>
                         @if (Auth::user()->is_owner)
