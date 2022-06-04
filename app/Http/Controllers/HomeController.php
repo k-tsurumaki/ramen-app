@@ -42,6 +42,11 @@ class HomeController extends Controller
         return view('others')->with(['posts' => $post->getPaginateUserPosts(6, $id), 'user' => User::find($id)]);
     }
 
+    public function friend_posts(Post $post)
+    {
+        return view('friend_posts')->with(['posts' => $post->getPaginateFriendPosts(6)]);
+    }
+
     public function timeline(Post $post)
     {
         return view('timeline')->with(['posts' => $post->getPaginate(6)]);

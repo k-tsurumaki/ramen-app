@@ -44,6 +44,17 @@ class Post extends Model
             ->paginate($limit_count);
     }
 
+    public function getPaginateFriendPosts(int $limit_count = 6)
+    {
+        // フォローしている人の過去の投稿を取得 deleted_atがNullのものを降順で取ってくる
+        return $this
+            ->select()
+            ->whereIn('user_id', \Auth::user()->follows()->pluck('user_id'))
+            ->whereNull('posts.deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($limit_count);
+    }
+
     public function getPaginateUserPosts(int $limit_count = 6, int $user_id)
     {
         // 過去の投稿を取得 deleted_atがNullのものを降順で取ってくる

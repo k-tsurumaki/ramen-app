@@ -30,6 +30,7 @@ Auth::routes();
 // Route::get('/', [LoginController::class, 'redirect'])->name('redirect');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/friend_posts', [HomeController::class, 'friend_posts'])->name('friend_posts');
 Route::get('/timeline', [HomeController::class, 'timeline'])->name('timeline');
 Route::get('/create', [HomeController::class, 'create'])->name('create');
 Route::get('/register_shop_profile', [HomeController::class, 'register_shop_profile'])->name('register_shop_profile');
