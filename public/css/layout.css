@@ -12,7 +12,7 @@
 @media screen and (max-width:768px) {
     .my-card-body{
         height: auto;
-        max-height: 50vh;
+        /* max-height: 50vh; */
     }
 }
 
@@ -58,9 +58,4 @@ footer.footer{
 
 .map{
     text-align: center;
-}
-
-#top {
-    background-image: url(../images/top_image.jpg);
-    background-color: aqua;
 }
