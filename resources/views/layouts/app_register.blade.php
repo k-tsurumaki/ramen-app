@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'ramen') }}</title>
+    <title>{{ config('app.name', 'おれの麺日記') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand">
-                    {{ config('app.name', 'ramen') }}
+                    {{ config('app.name', 'おれの麺日記') }}
                 </a>
             </div>
         </nav>
@@ -37,5 +37,5 @@
         </main>
     </div>
 </body>
-<footer class="footer">ramen</footer>
+<footer class="footer">おれの麺日記</footer>
 </html>
