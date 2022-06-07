@@ -6,7 +6,7 @@
 
     </div>
     <div class="col-md-4">
-        <div class="card  mx-auto my-card-body">
+        <div class="card  mx-auto">
             <div class="card-header">
                 お店情報の登録
             </div>
