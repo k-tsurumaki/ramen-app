@@ -10,7 +10,7 @@
 
     </div>
     <div class="col-md-4">
-        <div class="card  mx-auto my-card-body">
+        <div class="card  mx-auto">
             <div class="card-header d-flex justify-content-between">
                 詳細
                 <form id="edit-form" action="/edit/{{$detail['edit_post']['id']}}" method="GET">

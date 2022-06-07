@@ -10,7 +10,7 @@
 
     </div>
     <div class="col-md-4">
-        <div class="card  mx-auto my-card-body">
+        <div class="card  mx-auto">
             <div class="card-header d-flex justify-content-between">
                 編集
                 <form id="delete-form" action="{{ route('destroy') }}" method="POST">
