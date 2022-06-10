@@ -1,62 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# おれの麺日記
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![image (3)](https://user-images.githubusercontent.com/92656989/173080955-f4ac71fd-11c6-4be8-897f-ac022afba47d.png)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# 特徴
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+口コミサイトで評価の高いラーメン屋に行った際、メニューいっぱいありすぎてどれ食べたらいいんだろう？ってなったことありませんか？
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+友達におすすめのラーメン屋教えて！って言われた時に困ったことないですか？
 
-## Learning Laravel
+**「おれの麺日記」はそれらの問題を解決します！**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 1. その店に関連する投稿のみでいいねランキング・しぼり込み機能が使える！！
+![image (6)](https://user-images.githubusercontent.com/92656989/173083892-bcac6fcb-7d36-4e02-96be-a2fe7b3b649b.png)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+お店のページに行って、中央右上の「いいねランキング」を押すと人気投稿順に確認できる！！
 
-## Laravel Sponsors
+また、画面左側に検索項目を入力・設定することで今の自分の気分に合ったラーメンを見つけることもできる！！
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+![iOS の画像 (23)](https://user-images.githubusercontent.com/92656989/173083767-2950e39c-35a3-47cc-a0c0-ecc1571f9d44.jpg)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+もちろん、自分の過去のいいねした投稿もプロフィール画像下の「いいねした投稿を見る」から確認可能！
 
-## Contributing
+自分のお気に入りはぜひ保存しておこう！！
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 2.個人の投稿のみでしぼり込み機能が使える！！
+![iOS の画像 (24)](https://user-images.githubusercontent.com/92656989/173083496-c25d586f-71bb-4631-9ab7-2f7deb59cecc.jpg)
 
-## Code of Conduct
+個人のページでもしぼり込み機能を使える！！
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+友達の好みを聴いて、その子に一番合うラーメンを教えてあげよう！
 
-## Security Vulnerabilities
+人気者になれるかも...？
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Requirement
+
+* huga 3.5.2
+* hogehuga 1.0.2
+* php : ^7.3|^8.0
+* aws/aws-sdk-php : ^3.222
+* fideloper/proxy : ^4.4"
+* fruitcake/laravel-cors: ^2.0
+* guzzlehttp/guzzle : ^7.0.1
+* laravel/framework": ^8.40
+* laravel/tinker : ^2.5
+* laravel/ui : ^3.4
+* league/flysystem-aws-s3-v3 : ~1.0
+
+# 使用方法
+1. トップ画面から「新規登録」
+2. 必要情報（名前、メールアドレス、パスワード）の設定
+3. ログイン
+
+# 各画面の説明
+* タイムライン
+    * 全ユーザーの投稿が表示されます
+* ホーム
+    * 自分の過去の投稿が表示されます
+* 友達の投稿
+    * 自分がフォローしている人の投稿が表示されます
+* 新規投稿
+    * 新規投稿を作成できます
+
+# 注意
+
+URLは公開していません。何かあれば以下までお願いします。
+
+# 作成者
+
+作成情報を列挙する
+
+* Tsurumaki Kazuki
+* kazuki.app.management@gmail.com
+
