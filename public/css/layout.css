@@ -9,7 +9,7 @@
     white-space: nowrap;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1895px) {
     .my-card-body{
         height: auto;
         /* max-height: 50vh; */
