@@ -14,8 +14,9 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($followers as $follower)
                     <h2><a href="/others/{{$follower['id']}}" class="card-text">{{ $follower->name }}</a></h2>
+                @if($follower['id']==Auth::id())
                     <!-- フォロー取消用ボタンを表示 -->
-                @if($follower->followers()->where('following_user_id', Auth::id())->exists())
+                @elseif($follower->followers()->where('following_user_id', Auth::id())->exists())
                     <div class="text-center"><a href="{{ route('unfollowing', $follower) }}" class="btn btn-dark">フォローをはずす</a></div>
                 @else
                     <!-- まだユーザーがフォローをしていなければ、フォローボタンを表示 -->
