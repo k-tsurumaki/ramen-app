@@ -74,5 +74,5 @@ URLは公開していません。何かあれば以下までお願いします�
 作成情報を列挙する
 
 * Tsurumaki Kazuki
-* kazuki.app.management@gmail.com
+* kazukimanagement51@gmail.com
 
