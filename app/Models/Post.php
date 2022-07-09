@@ -79,6 +79,7 @@ class Post extends Model
 
     public function getDetailPost(int $id, Shop $shop, Menu $menu)
     {
+        # IDから投稿の詳細のリストを返す
         $edit_post = $this->find($id);
         $shop_name = $shop->getShopName($edit_post['shop_id']);
         $menu_name = $menu->getMenuName($edit_post['menu_id']);
