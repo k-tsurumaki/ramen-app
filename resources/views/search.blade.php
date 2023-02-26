@@ -14,7 +14,7 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($search_results as $search_result)
                     <div class="card" style="width: 18.7rem;">
-                        <img src="{{ $search_result['image'] }}" class="card-img-top img" alt="ラーメン画像">
+                        <img src="{{ '/storage/'.$search_result['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
                             <a href="/shop/{{ $search_result['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $search_result->shop->name }}</h5></a>
                             <div class="row">

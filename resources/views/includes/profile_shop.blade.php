@@ -9,7 +9,7 @@
         <div class="text-center">
             <h3>{{ $shop->name }}</h3>
             <br>
-            <img src="{{ $shop['image'] }}" alt="お店の画像は登録されていません" class="img-thumbnail icon mb-5">
+            <img src="{{ '/storage/'.$shop['image'] }}" alt="お店の画像は登録されていません" class="img-thumbnail icon mb-5">
             <br>
             <div class="row  mb-3">
                 <i class="fa-solid fa-location-dot col-2 mt-1"></i>
