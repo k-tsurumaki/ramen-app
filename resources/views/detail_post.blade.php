@@ -23,7 +23,7 @@
             </div>
             <form class="card-body" action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <img src="{{ $detail['edit_post']['image'] }}" class='mb-3 mx-auto d-block img'/>
+                <img src="{{ '/storage/'.$detail['edit_post']['image'] }}" class='mb-3 mx-auto d-block img'/>
                 <div class="form-group mb-3" >
                     <input type="text" class="form-control" name="shop" placeholder="店名" value="{{ $detail['shop_name'] }}" disabled/>
                 </div>

@@ -14,7 +14,7 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                 @foreach($posts as $post)
                     <div class="card" style="width: 18.7rem;">
-                        <img src="{{ $post['image'] }}" class="card-img-top img" alt="ラーメン画像">
+                        <img src="{{ '/storage/'.$post['image'] }}" class="card-img-top img" alt="ラーメン画像">
                         <div class="card-body">
                             <a href="/shop/{{ $post['shop_id'] }}" class="card-title"><h5 class="card-title">{{ $post->shop->name }}</h5></a>
                             <div class="row">

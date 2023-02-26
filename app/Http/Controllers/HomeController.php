@@ -99,11 +99,14 @@ class HomeController extends Controller
         ]);
         $image = $request->file('image');
 
-        // $path = \Storage::put('/public', $image);
-        // $path = explode('/', $path);
+        // ローカル環境（保存場所は storage/app/public）
+        $path = \Storage::put('/public', $image);
+        $path = explode('/', $path);
+        // dd($path);
 
+        // 2023/2/26 s3のバケットを削除
         //バケットに「test」フォルダを作っているとき
-        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+        // $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
         DB::transaction(function() use($posts, $path) {
             // 存在確認
@@ -141,7 +144,9 @@ class HomeController extends Controller
                 'shop_id'=>$shop_id,
                 'menu_id'=>$menu_id,
                 'content'=>$posts['content'],
-                'image'=>Storage::disk('s3')->url($path), 
+                'image'=>$path[1],
+                // 2023/2/26 s3のバケットを削除
+                // 'image'=>Storage::disk('s3')->url($path), 
                 'price'=>(int)$posts['price'],
                 'thickness'=>(int)$posts['thickness'],
                 'intensity'=>(int)$posts['intensity'], 
@@ -170,11 +175,12 @@ class HomeController extends Controller
         ]);
         $image = $request->file('image');
 
-        // $path = \Storage::put('/public', $image);
-        // $path = explode('/', $path);
+        $path = \Storage::put('/public', $image);
+        $path = explode('/', $path);
 
+        // 2023/2/26 s3のバケットを削除
         //バケットに「test」フォルダを作っているとき
-        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+        // $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
         DB::transaction(function() use($posts, $path) {
             // 存在確認
@@ -183,21 +189,27 @@ class HomeController extends Controller
 
             if($shop_name_exist && $shop_address_exist){
                 Shop::where('name', '=', $posts['shop'])->where('address', '=', $posts['address'])->update([
-                    'image'=>Storage::disk('s3')->url($path),
+                    'image'=>$path[1],        
+                    // 2023/2/26 s3のバケットを削除
+                    // 'image'=>Storage::disk('s3')->url($path),
                     'user_id'=>\Auth::id()
                 ]);
             }
             elseif($shop_name_exist && !($shop_address_exist)){
                 Shop::where('name', '=', $posts['shop'])->update([
                     'address'=>$posts['address'],
-                    'image'=>Storage::disk('s3')->url($path),
+                    'image'=>$path[1],        
+                    // 2023/2/26 s3のバケットを削除
+                    // 'image'=>Storage::disk('s3')->url($path),
                     'user_id'=>\Auth::id()
                 ]);
             }
             else{
                 Shop::insert(['name'=>$posts['shop'], 
                             'address'=>$posts['address'],
-                            'image'=>Storage::disk('s3')->url($path),
+                            'image'=>$path[1],  
+                            // 2023/2/26 s3のバケットを削除 
+                            // 'image'=>Storage::disk('s3')->url($path),
                             'user_id'=>\Auth::id(),
                             'created_at'=>Carbon::now(),
                             'updated_at'=>Carbon::now(),]);
@@ -289,16 +301,20 @@ class HomeController extends Controller
 
         $image = $request->file('image');
 
-        // $path = \Storage::put('/public', $image);
-        // $path = explode('/', $path);
-
+        $path = \Storage::put('/public', $image);
+        $path = explode('/', $path);
+        // dd($path);
+       
+        // 2023/2/26 s3のバケットを削除
         //バケットに「test」フォルダを作っているとき
-        $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+        // $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
         DB::transaction(function() use($user, $path){
             User::where('id', \Auth::id())->update([
                 'name'=>$user['name'],
-                'image'=>Storage::disk('s3')->url($path),
+                'image'=>$path[1],        
+                // 2023/2/26 s3のバケットを削除
+                // 'image'=>Storage::disk('s3')->url($path),
             ]);
         });
         return redirect(route('home'));
@@ -316,12 +332,17 @@ class HomeController extends Controller
 
         $image = $request->file('image');
         if(isset($image)){
-            $path = Storage::disk('s3')->putFile('/test',$image, 'public');
+            $path = \Storage::put('/public', $image);
+            $path = explode('/', $path);
+            // 2023/2/26 s3のバケットを削除
+            // $path = Storage::disk('s3')->putFile('/test',$image, 'public');
 
             DB::transaction(function() use($shop, $path){
                 Shop::where('id', $shop['id'])->update([
                     'name'=>$shop['shop'],
-                    'image'=>Storage::disk('s3')->url($path),
+                    'image'=>$path[1],        
+                    // 2023/2/26 s3のバケットを削除
+                    // 'image'=>Storage::disk('s3')->url($path),
                     'address'=>$shop['address'],
                     'station'=>$shop['station']
                 ]);
