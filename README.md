@@ -67,11 +67,9 @@
 
 # 注意
 
-URLは公開していません。何かあれば以下までお願いします。
+現在一般公開はしておりません。
 
 # 作成者
-
-作成情報を列挙する
 
 * Tsurumaki Kazuki
 * kazukimanagement51@gmail.com
